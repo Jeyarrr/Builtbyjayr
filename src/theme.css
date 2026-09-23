@@ -1,0 +1,419 @@
+/* Semantic colors shared by both themes. Project artwork retains its own palette. */
+:root {
+  color-scheme: dark;
+  --page: #10130f;
+  --surface: #151a12;
+  --surface-raised: #1a2215;
+  --surface-work: #181e14;
+  --surface-contact: #242f1c;
+  --surface-input: #171e13;
+  --surface-code: #12190e;
+  --text: #eaece6;
+  --text-secondary: #aab69e;
+  --text-soft: #95a785;
+  --border: #35432c;
+  --border-strong: #536940;
+  --accent: #c8ef91;
+  --accent-soft: #2c3922;
+  --header-bg: #10130fc9;
+  --header-solid: #10130ff2;
+  --button-bg: #c8ef91;
+  --button-text: #1b2812;
+  --focus-ring: #c8ef91;
+  --footer-ink: #829773;
+  --code-keyword: #cfb4dc;
+  --code-string: #c8ddac;
+  --bg: var(--page);
+  --panel: var(--surface-raised);
+  --muted: var(--text-secondary);
+  --line: var(--border);
+  --lime: var(--accent);
+  --bs-body-bg: var(--page);
+  --bs-body-color: var(--text);
+  --bs-emphasis-color: var(--text);
+  --bs-border-color: var(--border);
+  color: var(--text);
+  background: var(--page);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f2;
+  --surface: #edf1e7;
+  --surface-raised: #ffffff;
+  --surface-work: #eaf0e3;
+  --surface-contact: #e1ebd5;
+  --surface-input: #fafcf6;
+  --surface-code: #e5ecdb;
+  --text: #20291c;
+  --text-secondary: #516147;
+  --text-soft: #5c6d51;
+  --border: #cdd8c1;
+  --border-strong: #96ad80;
+  --accent: #3f6625;
+  --accent-soft: #dae8c9;
+  --header-bg: #f6f7f2d9;
+  --header-solid: #f6f7f2f5;
+  --focus-ring: #3b6c21;
+  --footer-ink: #6b825b;
+  --code-keyword: #71468b;
+  --code-string: #42652c;
+}
+body,
+.motion-root {
+  color: var(--text);
+  background: var(--page);
+}
+::selection {
+  background: var(--accent);
+  color: var(--page);
+}
+.site-header {
+  background: var(--header-bg);
+  border-color: var(--border);
+}
+.site-header.is-scrolled {
+  background: var(--header-solid);
+  border-color: var(--border);
+}
+.nav-links > a:not(.nav-contact),
+.hero-index,
+.hero-bottom,
+.eyebrow {
+  color: var(--text-secondary);
+}
+.nav-links > a:hover,
+.nav-links > a[aria-current],
+.text-button:hover {
+  color: var(--accent);
+}
+.nav-links > a:not(.nav-contact):after {
+  background: var(--accent);
+}
+.nav-contact,
+.icon-button,
+.motion-toggle,
+.theme-toggle {
+  border-color: var(--border-strong);
+}
+.icon-button {
+  background: var(--surface-raised);
+}
+.motion-toggle,
+.theme-toggle {
+  color: var(--text-secondary);
+}
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface-raised);
+  flex-shrink: 0;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+.theme-toggle:hover,
+.motion-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.header-controls {
+  gap: 9px;
+  flex-shrink: 0;
+}
+button:focus-visible,
+a:focus-visible,
+.technology-item:focus-visible {
+  outline-color: var(--focus-ring);
+}
+.primary-button,
+.primary-button:focus {
+  color: var(--button-text);
+  background: var(--button-bg);
+  border-color: #abc977;
+}
+.primary-button:hover {
+  color: var(--button-text);
+  background: #d4f7ab;
+}
+.cinematic-hero .hero-intro,
+.cinematic-hero .hero-description {
+  color: var(--text-secondary);
+}
+.about-section {
+  background: var(--surface);
+  border-color: var(--border);
+}
+.work-section {
+  background: var(--surface-work);
+  border-color: var(--border);
+}
+.contact-section {
+  background: var(--surface-contact);
+  border-color: var(--border);
+}
+.skills-section,
+.education-row,
+.technology-row,
+.responsibility {
+  border-color: var(--border);
+}
+.section-index:after {
+  background: var(--border-strong);
+}
+.about-statement span,
+.timeline-content h3 span {
+  color: var(--text-soft);
+}
+.about-copy p,
+.section-description p,
+.responsibility p,
+.showcase-copy p,
+.dialog-copy > p,
+.dialog-copy li {
+  color: var(--text-secondary);
+}
+.developer-note {
+  background: var(--surface-code);
+  border-color: var(--border-strong);
+}
+.developer-note pre {
+  color: var(--text-secondary);
+}
+.code-note-label {
+  color: var(--text-soft);
+}
+.code-keyword {
+  color: var(--code-keyword);
+}
+.code-string {
+  color: var(--code-string);
+}
+.timeline-date small,
+.responsibility > span,
+.responsibility > svg,
+.education-date,
+.education-row > svg,
+.education-row p {
+  color: var(--text-soft);
+}
+.timeline-line {
+  background: linear-gradient(var(--accent), var(--border));
+}
+.timeline-dot {
+  border-color: var(--page);
+}
+.featured-project,
+.project-actions {
+  border-color: var(--border);
+}
+.filter-list button {
+  color: var(--text-secondary);
+}
+.filter-list button.active {
+  color: var(--accent);
+}
+.filter-list .filter-active-bg {
+  background: var(--accent-soft);
+  border-color: var(--border-strong);
+}
+.concept-note,
+.showcase-copy .project-meta {
+  color: var(--text-soft);
+}
+.featured-label {
+  color: var(--accent);
+  border-color: var(--border-strong);
+}
+.tag-list > span,
+.showcase-copy .tag-list > span {
+  color: var(--text-secondary);
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+.tag-list > span:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.external-project-link {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.external-project-link:hover {
+  background: var(--accent-soft);
+}
+.technology-category > span,
+.technology-category p {
+  color: var(--text-soft);
+}
+.technology-item {
+  background: var(--surface-raised);
+  border-color: var(--border);
+  color: var(--text);
+}
+.technology-item > small {
+  color: var(--text-soft);
+}
+.technology-item:hover,
+.technology-item:focus-visible {
+  background: var(--accent-soft);
+  border-color: var(--border-strong);
+}
+.brand-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  object-fit: contain;
+  vertical-align: middle;
+}
+:root:not([data-theme="light"]) .brand-icon-mono {
+  filter: brightness(0) invert(1);
+}
+.contact-section .col-lg-6 > p,
+.contact-note,
+.socials a {
+  color: var(--text-secondary);
+}
+.contact-form {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+.contact-form label {
+  color: var(--text);
+}
+.form-control {
+  color: var(--text);
+  background: var(--surface-input);
+  border-color: var(--border-strong);
+}
+.form-control::placeholder {
+  color: var(--text-soft);
+}
+.form-control:focus {
+  color: var(--text);
+  background: var(--surface-input);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.form-note {
+  color: var(--text-secondary);
+}
+.form-status {
+  color: var(--accent);
+}
+.email-link {
+  border-color: var(--border-strong);
+}
+.project-dialog {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+.dialog-close {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+.dialog-copy .preview-note {
+  color: var(--text-soft) !important;
+}
+.editorial-footer {
+  background: var(--page);
+}
+.footer-signature,
+.footer-signature > span {
+  color: var(--footer-ink);
+}
+.footer-signature:hover {
+  color: var(--accent);
+}
+.editorial-footer .footer-inner {
+  border-color: var(--border);
+}
+.editorial-footer .footer-inner > span {
+  color: var(--text-secondary);
+}
+
+/* Light surfaces for the original signature; product illustrations remain intact. */
+:root[data-theme="light"] .hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 65% 35%, #9cbe6c24, transparent 60%),
+    linear-gradient(90deg, transparent 49.8%, #617d3a0c 50%, transparent 50.2%);
+}
+:root[data-theme="light"] .architecture-grid {
+  background-image:
+    linear-gradient(#496c2920 1px, transparent 1px),
+    linear-gradient(90deg, #496c2920 1px, transparent 1px);
+}
+:root[data-theme="light"] .signature-architecture {
+  background: linear-gradient(145deg, #e7efdcf5, #f8faf3);
+  border-color: #a2b88d;
+  box-shadow:
+    25px 25px 0 -1px #e7eddf,
+    25px 25px 0 0 #bccbad;
+}
+:root[data-theme="light"] .signature-caption,
+:root[data-theme="light"] .signature-bottom {
+  color: #526942;
+}
+:root[data-theme="light"] .signature-rule {
+  background: #a4b990;
+}
+:root[data-theme="light"] .signature-rail {
+  border-color: #9aaf8566;
+}
+:root[data-theme="light"] .stage-corner {
+  color: #6c86584f;
+}
+:root[data-theme="light"] .architecture-chip {
+  color: #456232;
+  background: #eaf2df;
+  border-color: #afc49a;
+}
+:root[data-theme="light"] .about-art {
+  background: #dce7ce;
+  border-color: #a6bb90;
+}
+:root[data-theme="light"] .about-art .eyebrow {
+  color: #455d35;
+}
+:root[data-theme="light"] .about-art-bottom,
+:root[data-theme="light"] .about-art-bottom small,
+:root[data-theme="light"] .art-coordinate {
+  color: #eff5e8;
+}
+:root[data-theme="light"] .project-dialog::backdrop {
+  background: #1c291599;
+}
+
+@media (max-width: 991px) {
+  .header-inner {
+    gap: 12px;
+  }
+  .nav-links {
+    gap: 14px;
+  }
+}
+@media (max-width: 767px) {
+  .nav-links {
+    background: var(--header-solid);
+  }
+  .header-controls {
+    gap: 7px;
+  }
+  .header-inner {
+    gap: 8px;
+  }
+  .theme-toggle {
+    width: 33px;
+    height: 33px;
+  }
+  :root[data-theme="light"] .signature-architecture {
+    box-shadow:
+      14px 14px 0 -1px #e7eddf,
+      14px 14px 0 0 #bccbad;
+  }
+}
