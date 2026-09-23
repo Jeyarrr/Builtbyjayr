@@ -13,6 +13,10 @@ Open the local URL printed by Vite. For a production build, run `npm run build`.
 
 Run `npm test` for interaction checks and `npm run format` to format the source files. The tests use jsdom; native browser layout and dialog focus containment still require a browser check.
 
+## Deploy to Vercel
+
+Import the existing `Jeyarrr/Builtbyjayr` GitHub repository into Vercel, or run `vercel deploy --prod` from this folder after signing in. `vercel.json` sets the Vite framework, `npm run build`, and the `dist` output directory. Connect the existing repository in Project Settings → Git to deploy future pushes automatically; do not clone it into a second repository.
+
 ## Make it yours
 
 Edit `src/content.js` to change your name, role, introduction, biography, email, social links, and projects. Profile information and the portrait were adapted from https://jeyarrr.github.io/Portfolio/. TechOra details and its product image come from https://github.com/Jeyarrr/TechOra. Its live link is https://techora-store.vercel.app/.
