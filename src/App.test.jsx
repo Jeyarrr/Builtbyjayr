@@ -312,6 +312,18 @@ describe("portfolio interactions", () => {
     await user.click(trigger);
     expect(screen.getByRole("dialog").open).toBe(true);
     expect(document.body.style.overflow).toBe("hidden");
+    const dialog = screen.getByRole("dialog");
+    expect(dialog.querySelector(".project-art img").getAttribute("src")).toBe(
+      "/projects/jbank-overview.png",
+    );
+    await user.click(
+      screen.getByRole("button", {
+        name: "Show JBank Banking flows screenshot",
+      }),
+    );
+    expect(dialog.querySelector(".project-art img").getAttribute("src")).toBe(
+      "/projects/jbank-transfers.png",
+    );
     expect(
       screen.getByRole("link", { name: /View Figma prototype/ }).href,
     ).toContain("figma.com/proto/");

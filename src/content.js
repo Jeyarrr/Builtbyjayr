@@ -84,7 +84,23 @@ export const projects = [
       "Everyday banking, thoughtfully designed. A mobile experience focused on clarity, confidence, and ease of use.",
     tags: ["Figma", "UI / UX", "Prototyping"],
     color: "green",
-    image: "",
+    image: "/projects/jbank-overview.png",
+    gallery: [
+      {
+        src: "/projects/jbank-overview.png",
+        label: "Overview",
+        alt: "JBank welcome, sign-up, home, and investment screen designs",
+        width: 1294,
+        height: 714,
+      },
+      {
+        src: "/projects/jbank-transfers.png",
+        label: "Banking flows",
+        alt: "JBank transfer, pay and e-wallet, and profile screen designs",
+        width: 991,
+        height: 708,
+      },
+    ],
     url: "https://www.figma.com/proto/qfXGW9uZCLZubzEPDtqDV8?node-id=0-1&t=WGB5T80IAi4NUXnd-6",
     summary:
       "A mobile banking application design created in Figma, exploring a secure, intuitive, and user-focused experience. Includes a design system and prototypes for core banking functions.",

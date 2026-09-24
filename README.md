@@ -23,7 +23,7 @@ Edit `src/content.js` to change your name, role, introduction, biography, email,
 
 Experience lives in `src/components/ExperienceTimeline.jsx` (exported through `src/Experience.jsx`); education lives in `src/components/Education.jsx`. Each major section has its own component. The About section uses `public/jayr-cutout.png`, a transparent portrait cutout.
 
-Project artwork is explicitly labeled as a stylized illustration. To use actual screenshots, place optimized WebP/AVIF images in `public/projects/` and set the corresponding project's `image` in `src/content.js`, for example `/projects/techora.webp`. Use a consistent landscape crop around 1440 × 1000. Screenshots are lazy-loaded and fall back to the illustrations if unavailable. Each project links directly to its live site or Figma prototype; source links are included where a public repository is known.
+JBank uses real Figma screenshots in `public/projects/`; its project details let visitors switch between the overview and banking flows. Other project artwork is labeled as a stylized illustration. To add actual screenshots for those projects, place images in `public/projects/` and set the corresponding project's `image` in `src/content.js`, for example `/projects/techora.webp`. Screenshots are lazy-loaded and fall back to illustrations if unavailable. Each project links directly to its live site or Figma prototype; source links are included where a public repository is known.
 
 Set `profile.email` to enable the contact form's email draft flow. Without an email, the form copies the inquiry and explicitly says nothing was sent. There is no backend or message storage. Social links appear when their URLs are supplied.
 

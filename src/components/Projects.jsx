@@ -18,17 +18,20 @@ import {
 
 const filters = ["All work", "Web apps", "Websites", "UI / UX"];
 
-function ProjectVisual({ project }) {
+function ProjectVisual({ project, image = project.image, alt }) {
   const [failed, setFailed] = useState(false);
-  if (project.image && !failed)
+  const imageDetails = project.gallery?.find((item) => item.src === image);
+  if (image && !failed)
     return (
-      <div className={`project-art screenshot-art ${project.color}`}>
+      <div
+        className={`project-art screenshot-art ${project.color} ${project.id === "jbank" ? "jbank-screenshot" : ""}`}
+      >
         <img
-          src={project.image}
-          alt={`${project.name} interface`}
+          src={image}
+          alt={alt || imageDetails?.alt || `${project.name} interface`}
           loading="lazy"
-          width="1440"
-          height="1000"
+          width={imageDetails?.width || 1440}
+          height={imageDetails?.height || 1000}
           onError={() => setFailed(true)}
         />
       </div>
@@ -147,6 +150,8 @@ function ProjectCard({ project, index, onOpen, ref }) {
 function ProjectDialog({ project, onClose }) {
   const ref = useRef(null);
   const { reduced } = useMotionSettings();
+  const [activeImage, setActiveImage] = useState(0);
+  const selectedImage = project.gallery?.[activeImage];
   useEffect(() => {
     const dialog = ref.current,
       previouslyFocused = document.activeElement,
@@ -182,7 +187,33 @@ function ProjectDialog({ project, onClose }) {
         >
           <X />
         </button>
-        <ProjectVisual project={project} />
+        <ProjectVisual
+          key={selectedImage?.src || project.id}
+          project={project}
+          image={selectedImage?.src}
+          alt={selectedImage?.alt}
+        />
+        {project.gallery?.length > 1 && (
+          <div
+            className="project-gallery-tabs"
+            role="group"
+            aria-label={`${project.name} screenshots`}
+          >
+            {project.gallery.map((item, index) => (
+              <button
+                key={item.src}
+                type="button"
+                className={index === activeImage ? "is-active" : ""}
+                aria-label={`Show ${project.name} ${item.label} screenshot`}
+                aria-pressed={index === activeImage}
+                onClick={() => setActiveImage(index)}
+              >
+                <img src={item.src} alt="" loading="lazy" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
         <div className="dialog-copy">
           <span className="eyebrow">{project.label}</span>
           <h2 id="project-title">{project.name}</h2>
