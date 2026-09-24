@@ -5,7 +5,13 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
-import { ArrowUpRight, X, ArrowRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  X,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import BrandIcon from "./BrandIcon";
 import { projects } from "../content";
 import ProjectArt from "./ProjectArt";
@@ -24,7 +30,7 @@ function ProjectVisual({ project, image = project.image, alt }) {
   if (image && !failed)
     return (
       <div
-        className={`project-art screenshot-art ${project.color} ${project.id === "jbank" ? "jbank-screenshot" : ""}`}
+        className={`project-art screenshot-art ${project.color} ${project.id === "jbank" ? "jbank-screenshot" : ""} ${project.id === "tastenet" ? "tastenet-screenshot" : ""}`}
       >
         <img
           src={image}
@@ -194,25 +200,59 @@ function ProjectDialog({ project, onClose }) {
           alt={selectedImage?.alt}
         />
         {project.gallery?.length > 1 && (
-          <div
-            className="project-gallery-tabs"
-            role="group"
-            aria-label={`${project.name} screenshots`}
-          >
-            {project.gallery.map((item, index) => (
-              <button
-                key={item.src}
-                type="button"
-                className={index === activeImage ? "is-active" : ""}
-                aria-label={`Show ${project.name} ${item.label} screenshot`}
-                aria-pressed={index === activeImage}
-                onClick={() => setActiveImage(index)}
-              >
-                <img src={item.src} alt="" loading="lazy" />
-                <span>{item.label}</span>
-              </button>
-            ))}
-          </div>
+          <>
+            <div className="project-gallery-toolbar">
+              <span>
+                {activeImage + 1} / {project.gallery.length} ·{" "}
+                {selectedImage.label}
+              </span>
+              <div>
+                <button
+                  type="button"
+                  aria-label={`Previous ${project.name} screenshot`}
+                  onClick={() =>
+                    setActiveImage(
+                      (index) =>
+                        (index - 1 + project.gallery.length) %
+                        project.gallery.length,
+                    )
+                  }
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  type="button"
+                  aria-label={`Next ${project.name} screenshot`}
+                  onClick={() =>
+                    setActiveImage(
+                      (index) => (index + 1) % project.gallery.length,
+                    )
+                  }
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            </div>
+            <div
+              className="project-gallery-tabs"
+              role="group"
+              aria-label={`${project.name} screenshots`}
+            >
+              {project.gallery.map((item, index) => (
+                <button
+                  key={item.src}
+                  type="button"
+                  className={index === activeImage ? "is-active" : ""}
+                  aria-label={`Show ${project.name} ${item.label} screenshot`}
+                  aria-pressed={index === activeImage}
+                  onClick={() => setActiveImage(index)}
+                >
+                  <img src={item.src} alt="" loading="lazy" />
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </>
         )}
         <div className="dialog-copy">
           <span className="eyebrow">{project.label}</span>

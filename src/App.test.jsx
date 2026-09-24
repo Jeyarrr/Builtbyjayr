@@ -348,6 +348,37 @@ describe("portfolio interactions", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
+  it("shows all TasteNet screenshots and cycles through the gallery", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(
+      screen.getByRole("button", { name: "View TASTENET project details" }),
+    );
+    const dialog = screen.getByRole("dialog");
+    const screenshot = () =>
+      dialog.querySelector(".project-art img").getAttribute("src");
+    expect(screenshot()).toBe("/projects/tastenet/home.png");
+    expect(
+      screen
+        .getByRole("group", { name: "TASTENET screenshots" })
+        .querySelectorAll("button"),
+    ).toHaveLength(16);
+    await user.click(
+      screen.getByRole("button", { name: "Next TASTENET screenshot" }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet/sign-in.png");
+    await user.click(
+      screen.getByRole("button", {
+        name: "Show TASTENET Rider profile screenshot",
+      }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet/rider-profile.png");
+    await user.click(
+      screen.getByRole("button", { name: "Next TASTENET screenshot" }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet/home.png");
+  });
+
   it("closes mobile navigation after choosing a section", async () => {
     const user = userEvent.setup();
     render(<App />);
