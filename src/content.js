@@ -180,7 +180,51 @@ export const projects = [
     color: "sand",
     url: "https://jeyarrr.github.io/JB-Nav-Enterprise/",
     github: "https://github.com/Jeyarrr/JB-Nav-Enterprise",
-    image: "",
+    image: "/projects/jbnav/home.png",
+    gallery: [
+      {
+        src: "/projects/jbnav/home.png",
+        label: "Home",
+        alt: "JB Nav Enterprise homepage and event booking call to action",
+        width: 1905,
+        height: 906,
+      },
+      {
+        src: "/projects/jbnav/about.png",
+        label: "About",
+        alt: "JB Nav Enterprise introduction and company highlights",
+        width: 1910,
+        height: 910,
+      },
+      {
+        src: "/projects/jbnav/services.png",
+        label: "Services",
+        alt: "JB Nav Enterprise catering, event planning, and entertainment services",
+        width: 1906,
+        height: 906,
+      },
+      {
+        src: "/projects/jbnav/gallery.png",
+        label: "Gallery",
+        alt: "JB Nav Enterprise gallery of event setups and celebrations",
+        width: 1907,
+        height: 910,
+      },
+      {
+        src: "/projects/jbnav/booking.png",
+        label: "Book now",
+        alt: "JB Nav Enterprise event booking request form",
+        width: 1907,
+        height: 911,
+      },
+      {
+        src: "/projects/jbnav/contact.png",
+        label: "Contact",
+        alt: "JB Nav Enterprise contact details and message form",
+        width: 1905,
+        height: 906,
+      },
+    ],
     summary:
       "A responsive website for JB Nav Enterprise, a premium party and catering company. Designed to showcase services, build client trust, and help prospective customers make event inquiries.",
     features: [

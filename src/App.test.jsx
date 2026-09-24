@@ -379,6 +379,31 @@ describe("portfolio interactions", () => {
     expect(screenshot()).toBe("/projects/tastenet/home.png");
   });
 
+  it("shows the JB Nav Enterprise screenshots in its project gallery", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(
+      screen.getByRole("button", {
+        name: "View JB Nav Enterprise project details",
+      }),
+    );
+    const dialog = screen.getByRole("dialog");
+    const screenshot = () =>
+      dialog.querySelector(".project-art img").getAttribute("src");
+    expect(screenshot()).toBe("/projects/jbnav/home.png");
+    expect(
+      screen
+        .getByRole("group", { name: "JB Nav Enterprise screenshots" })
+        .querySelectorAll("button"),
+    ).toHaveLength(6);
+    await user.click(
+      screen.getByRole("button", {
+        name: "Show JB Nav Enterprise Gallery screenshot",
+      }),
+    );
+    expect(screenshot()).toBe("/projects/jbnav/gallery.png");
+  });
+
   it("closes mobile navigation after choosing a section", async () => {
     const user = userEvent.setup();
     render(<App />);

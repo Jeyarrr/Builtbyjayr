@@ -826,6 +826,13 @@ body {
   object-fit: contain;
   object-position: center;
 }
+.project-dialog .jbnav-screenshot {
+  background: #f4ead7;
+}
+.project-dialog .jbnav-screenshot img {
+  object-fit: contain;
+  object-position: center;
+}
 .project-jbank .visual-corner-label {
   color: #f3f5ff;
   background: #17285dcc;
@@ -835,6 +842,11 @@ body {
   color: #fff3dd;
   background: #5e1120e8;
   border-color: #ffd84588;
+}
+.project-jbnav .visual-corner-label {
+  color: #fff9e9;
+  background: #4a4133e8;
+  border-color: #d7b86488;
 }
 .project-image-button:hover .screenshot-art img {
   transform: scale(1.025);

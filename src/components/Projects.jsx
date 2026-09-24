@@ -30,7 +30,7 @@ function ProjectVisual({ project, image = project.image, alt }) {
   if (image && !failed)
     return (
       <div
-        className={`project-art screenshot-art ${project.color} ${project.id === "jbank" ? "jbank-screenshot" : ""} ${project.id === "tastenet" ? "tastenet-screenshot" : ""}`}
+        className={`project-art screenshot-art ${project.color} ${project.id}-screenshot`}
       >
         <img
           src={image}
