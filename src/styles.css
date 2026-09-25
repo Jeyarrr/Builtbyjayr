@@ -4,17 +4,17 @@
 
 :root {
   font-family: Arial, Helvetica, sans-serif;
-  color: #eaece6;
-  background: #111412;
+  color: #f4f4f4;
+  background: #090909;
   font-synthesis: none;
-  --bg: #111412;
-  --panel: #191d19;
-  --muted: #999f96;
-  --lime: #c3ed83;
-  --line: #30362e;
+  --bg: #090909;
+  --panel: #191919;
+  --muted: #b2b2b2;
+  --lime: #ffffff;
+  --line: #333333;
   --bs-body-font-family: Arial, Helvetica, sans-serif;
-  --bs-body-bg: #111412;
-  --bs-body-color: #eaece6;
+  --bs-body-bg: #090909;
+  --bs-body-color: #f4f4f4;
 }
 html {
   scroll-behavior: smooth;

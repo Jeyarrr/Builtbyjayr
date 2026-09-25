@@ -10,6 +10,7 @@ const icons = {
   "ASP.NET": "dotnet",
   "C#": "csharp",
   PostgreSQL: "postgresql",
+  Supabase: "supabase",
   "SQL Server": "sqlserver",
   Azure: "azure",
   Vercel: "vercel",

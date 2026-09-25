@@ -9,8 +9,13 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/jay-r-casano-b3760a238/",
   intro:
     "Thoughtful interfaces. Reliable systems. I connect frontend, backend, and databases to turn good ideas into software that works for people.",
-  about:
-    "I’m Jayr Casano, a full-stack developer based in General Trias, Cavite. I build for the web with a focus on clarity, maintainable code, and the people on the other side of the screen.",
+  about: [
+    "Hello! I'm Jay-r Casano, an aspiring Full-Stack Developer and Associate ASP.NET Developer with a passion for building modern, efficient, and user-friendly web applications. I enjoy transforming ideas into functional software and continuously improving my skills through hands-on projects and real-world experience.",
+    "I completed my internship as a Junior Software Developer and IT Support, where I gained practical experience in software development, debugging, system maintenance, and technical support. Working in both development and IT support strengthened my problem-solving abilities, attention to detail, and understanding of how technology helps businesses operate efficiently.",
+    "My technical skills include ASP.NET, C#, HTML, CSS, JavaScript, Tailwind CSS, Microsoft SQL Server, Git, and .NET. I currently build with the PERN stack (PostgreSQL, Express.js, React, and Node.js), use Supabase in my projects, and deploy with Vercel. I'm continuing to expand my knowledge in full-stack development and modern web technologies while building projects that challenge me to grow as a developer.",
+    "Outside of coding, I enjoy learning new technologies, exploring software development best practices, and continuously improving my craft. My goal is to become a skilled Full-Stack Developer who creates reliable, scalable, and meaningful digital solutions.",
+    "I believe that every project is an opportunity to learn, improve, and make a positive impact through technology.",
+  ],
 };
 
 export const projects = [

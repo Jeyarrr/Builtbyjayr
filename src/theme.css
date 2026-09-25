@@ -1,28 +1,46 @@
-/* Semantic colors shared by both themes. Project artwork retains its own palette. */
+/* Adjust these two token blocks to change the entire monochrome / glass theme. */
 :root {
   color-scheme: dark;
-  --page: #10130f;
-  --surface: #151a12;
-  --surface-raised: #1a2215;
-  --surface-work: #181e14;
-  --surface-contact: #242f1c;
-  --surface-input: #171e13;
-  --surface-code: #12190e;
-  --text: #eaece6;
-  --text-secondary: #aab69e;
-  --text-soft: #95a785;
-  --border: #35432c;
-  --border-strong: #536940;
-  --accent: #c8ef91;
-  --accent-soft: #2c3922;
-  --header-bg: #10130fc9;
-  --header-solid: #10130ff2;
-  --button-bg: #c8ef91;
-  --button-text: #1b2812;
-  --focus-ring: #c8ef91;
-  --footer-ink: #829773;
-  --code-keyword: #cfb4dc;
-  --code-string: #c8ddac;
+  --page: #090909;
+  --surface: #101010;
+  --surface-raised: #191919;
+  --surface-work: #111111;
+  --surface-contact: #151515;
+  --surface-input: #09090980;
+  --surface-code: #ffffff05;
+  --text: #f4f4f4;
+  --text-secondary: #b2b2b2;
+  --text-soft: #999999;
+  --border: #ffffff21;
+  --border-strong: #ffffff3d;
+  --accent: #ffffff;
+  --accent-soft: #ffffff0f;
+  --header-bg: #09090999;
+  --header-solid: #090909cc;
+  --button-bg: #f5f5f5;
+  --button-hover: #dcdcdc;
+  --button-text: #111111;
+  --focus-ring: #ffffff;
+  --footer-ink: #777777;
+  --code-keyword: #ffffff;
+  --code-string: #c6c6c6;
+  --glass-bg: #ffffff06;
+  --glass-top: #ffffff12;
+  --glass-bottom: #ffffff03;
+  --glass-edge: #ffffff2b;
+  --glass-highlight: #ffffff1f;
+  --glass-shadow: 0 18px 60px #00000040, inset 0 1px 0 #ffffff12;
+  --glass-hover-shadow: 0 22px 65px #00000059, inset 0 1px 0 #ffffff26;
+  --glass-blur: 22px;
+  --glass-radius: 18px;
+  --ambient: #ffffff0d;
+  --grid-line: #ffffff0b;
+  --orb-light: #d9d9d9;
+  --orb-mid: #727272;
+  --orb-dark: #141414;
+  --portrait-fade: #101010;
+  --preview-filter: none;
+  --theme-duration: 350ms;
   --bg: var(--page);
   --panel: var(--surface-raised);
   --muted: var(--text-secondary);
@@ -37,26 +55,42 @@
 }
 :root[data-theme="light"] {
   color-scheme: light;
-  --page: #f6f7f2;
-  --surface: #edf1e7;
+  --page: #f7f7f7;
+  --surface: #eeeeee;
   --surface-raised: #ffffff;
-  --surface-work: #eaf0e3;
-  --surface-contact: #e1ebd5;
-  --surface-input: #fafcf6;
-  --surface-code: #e5ecdb;
-  --text: #20291c;
-  --text-secondary: #516147;
-  --text-soft: #5c6d51;
-  --border: #cdd8c1;
-  --border-strong: #96ad80;
-  --accent: #3f6625;
-  --accent-soft: #dae8c9;
-  --header-bg: #f6f7f2d9;
-  --header-solid: #f6f7f2f5;
-  --focus-ring: #3b6c21;
-  --footer-ink: #6b825b;
-  --code-keyword: #71468b;
-  --code-string: #42652c;
+  --surface-work: #f0f0f0;
+  --surface-contact: #e8e8e8;
+  --surface-input: #ffffff80;
+  --surface-code: #ffffff59;
+  --text: #141414;
+  --text-secondary: #555555;
+  --text-soft: #666666;
+  --border: #0000001c;
+  --border-strong: #00000036;
+  --accent: #111111;
+  --accent-soft: #00000008;
+  --header-bg: #ffffff99;
+  --header-solid: #ffffffcf;
+  --button-bg: #171717;
+  --button-hover: #383838;
+  --button-text: #ffffff;
+  --focus-ring: #111111;
+  --footer-ink: #727272;
+  --code-keyword: #111111;
+  --code-string: #555555;
+  --glass-bg: #ffffff66;
+  --glass-top: #ffffffcc;
+  --glass-bottom: #ffffff40;
+  --glass-edge: #ffffffed;
+  --glass-highlight: #ffffffb3;
+  --glass-shadow: 0 18px 60px #0000000d, inset 0 1px 0 #ffffff;
+  --glass-hover-shadow: 0 22px 65px #00000017, inset 0 1px 0 #ffffff;
+  --ambient: #00000009;
+  --grid-line: #00000009;
+  --orb-light: #ffffff;
+  --orb-mid: #d5d5d5;
+  --orb-dark: #777777;
+  --portrait-fade: #eeeeee;
 }
 body,
 .motion-root {
@@ -135,11 +169,13 @@ a:focus-visible,
 .primary-button:focus {
   color: var(--button-text);
   background: var(--button-bg);
-  border-color: #abc977;
+  border-color: var(--button-bg);
 }
 .primary-button:hover {
   color: var(--button-text);
-  background: #d4f7ab;
+  background: var(--button-hover);
+  border-color: var(--button-hover);
+  box-shadow: var(--glass-shadow);
 }
 .cinematic-hero .hero-intro,
 .cinematic-hero .hero-description {
@@ -337,56 +373,278 @@ a:focus-visible,
   color: var(--text-secondary);
 }
 
-/* Light surfaces for the original signature; product illustrations remain intact. */
-:root[data-theme="light"] .hero-atmosphere {
+/* Frosted surfaces share the same material in both themes. */
+body,
+.motion-root,
+.about-section,
+.work-section,
+.contact-section,
+.editorial-footer {
+  transition:
+    background-color var(--theme-duration),
+    color var(--theme-duration);
+}
+.site-header {
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 1px 0 var(--glass-edge);
+}
+.signature-architecture,
+.architecture-chip,
+.developer-note,
+.technology-item,
+.contact-form {
   background:
-    radial-gradient(ellipse at 65% 35%, #9cbe6c24, transparent 60%),
-    linear-gradient(90deg, transparent 49.8%, #617d3a0c 50%, transparent 50.2%);
+    linear-gradient(135deg, var(--glass-top), var(--glass-bottom)),
+    var(--glass-bg);
+  border-color: var(--border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
 }
-:root[data-theme="light"] .architecture-grid {
-  background-image:
-    linear-gradient(#496c2920 1px, transparent 1px),
-    linear-gradient(90deg, #496c2920 1px, transparent 1px);
+.developer-note,
+.contact-form,
+.technology-item {
+  transition:
+    background-color var(--theme-duration),
+    border-color 250ms,
+    box-shadow 350ms;
 }
-:root[data-theme="light"] .signature-architecture {
-  background: linear-gradient(145deg, #e7efdcf5, #f8faf3);
-  border-color: #a2b88d;
+.developer-note:hover,
+.contact-form:focus-within,
+.technology-item:hover,
+.technology-item:focus-visible {
+  background-color: var(--glass-bg);
+  border-color: var(--border-strong);
+  box-shadow: var(--glass-hover-shadow);
+}
+.nav-contact,
+.theme-toggle,
+.motion-toggle,
+.icon-button,
+.external-project-link {
+  background: var(--glass-bg);
+  box-shadow: inset 0 1px 0 var(--glass-edge);
+}
+.nav-contact,
+.primary-button,
+.form-control {
+  border-radius: 10px;
+}
+.skip-link {
+  color: var(--button-text);
+  background: var(--button-bg);
+}
+.status-dot,
+.timeline-dot {
   box-shadow:
-    25px 25px 0 -1px #e7eddf,
-    25px 25px 0 0 #bccbad;
+    0 0 0 4px var(--accent-soft),
+    0 0 16px var(--glass-highlight);
 }
-:root[data-theme="light"] .signature-caption,
-:root[data-theme="light"] .signature-bottom {
-  color: #526942;
+.muted-slash {
+  color: var(--text-soft);
 }
-:root[data-theme="light"] .signature-rule {
-  background: #a4b990;
+.hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 65% 35%, var(--ambient), transparent 65%),
+    linear-gradient(
+      90deg,
+      transparent 49.8%,
+      var(--grid-line) 50%,
+      transparent 50.2%
+    );
 }
-:root[data-theme="light"] .signature-rail {
-  border-color: #9aaf8566;
+.architecture-grid,
+.about-art:before {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
 }
-:root[data-theme="light"] .stage-corner {
-  color: #6c86584f;
+.signature-stage {
+  isolation: isolate;
 }
-:root[data-theme="light"] .architecture-chip {
-  color: #456232;
-  background: #eaf2df;
-  border-color: #afc49a;
+.signature-architecture {
+  transform-style: flat;
+  border-color: var(--glass-edge);
+  border-radius: 22px;
 }
-:root[data-theme="light"] .about-art {
-  background: #dce7ce;
-  border-color: #a6bb90;
+.signature-architecture:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at var(--glass-x, 25%) var(--glass-y, 20%),
+      var(--glass-highlight),
+      transparent 65%
+    ),
+    linear-gradient(
+      125deg,
+      transparent 25%,
+      var(--glass-top) 46%,
+      transparent 65%
+    );
 }
-:root[data-theme="light"] .about-art .eyebrow {
-  color: #455d35;
+.signature-caption,
+.signature-lockup,
+.signature-bottom {
+  position: relative;
 }
-:root[data-theme="light"] .about-art-bottom,
-:root[data-theme="light"] .about-art-bottom small,
-:root[data-theme="light"] .art-coordinate {
-  color: #eff5e8;
+.signature-caption,
+.signature-bottom,
+.architecture-chip {
+  color: var(--text-secondary);
 }
-:root[data-theme="light"] .project-dialog::backdrop {
-  background: #1c291599;
+.signature-rule {
+  background: var(--border-strong);
+}
+.signature-rail {
+  border-color: var(--border);
+}
+.architecture-node {
+  background: var(--text-soft);
+}
+.stage-corner {
+  color: var(--border-strong);
+}
+.architecture-chip {
+  border-radius: 9px;
+}
+.signature-orb {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 30% 25%,
+    var(--orb-light),
+    var(--orb-mid) 42%,
+    var(--orb-dark) 80%
+  );
+  box-shadow:
+    inset -15px -15px 35px #00000033,
+    inset 2px 2px 12px #ffffff40;
+}
+.signature-orb-one {
+  width: 200px;
+  height: 200px;
+  left: 3%;
+  top: 12%;
+  opacity: 0.6;
+}
+.signature-orb-two {
+  width: 110px;
+  height: 110px;
+  right: 0;
+  bottom: 7%;
+  opacity: 0.8;
+}
+@media (min-width: 992px) and (hover: hover) {
+  [data-motion="full"] .signature-orb-one {
+    animation: glass-drift 12s ease-in-out infinite alternate;
+  }
+  [data-motion="full"] .signature-orb-two {
+    animation: glass-drift 10s -5s ease-in-out infinite alternate-reverse;
+  }
+}
+@keyframes glass-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(18px, -24px, 0);
+  }
+}
+.about-art {
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      var(--glass-highlight),
+      transparent 65%
+    ),
+    var(--glass-bg);
+  border-color: var(--border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+}
+.portrait {
+  filter: none;
+}
+.about-art:after {
+  background: linear-gradient(transparent, var(--portrait-fade));
+}
+.about-art .eyebrow,
+.art-coordinate {
+  color: var(--text-secondary);
+}
+.art-coordinate {
+  z-index: 2;
+}
+.about-art-bottom {
+  color: var(--text);
+  text-shadow: none;
+  left: 16px;
+  right: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 12px;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.about-art-bottom small {
+  color: var(--text-secondary);
+}
+.project-image-button {
+  border-color: var(--border-strong);
+  border-radius: var(--glass-radius);
+  background: var(--surface-raised);
+  box-shadow: var(--glass-shadow);
+}
+.project-image-button .project-art {
+  filter: var(--preview-filter);
+}
+.showcase-card .visual-corner-label,
+.project-view-indicator {
+  color: #ffffff;
+  background: #111111a6;
+  border-color: #ffffff40;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.project-dialog {
+  background: var(--header-solid);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+.project-dialog::backdrop {
+  background: #00000099;
+}
+.project-dialog .screenshot-art {
+  background: var(--surface-raised);
+}
+.contact-section {
+  background:
+    radial-gradient(ellipse at 75% 45%, var(--ambient), transparent 65%),
+    var(--surface-contact);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .signature-architecture,
+  .architecture-chip,
+  .developer-note,
+  .technology-item,
+  .contact-form {
+    background: var(--surface-raised);
+  }
+}
+
+:root:has([data-motion="reduced"]) {
+  --theme-duration: 0ms;
 }
 
 @media (max-width: 991px) {
@@ -411,9 +669,94 @@ a:focus-visible,
     width: 33px;
     height: 33px;
   }
-  :root[data-theme="light"] .signature-architecture {
-    box-shadow:
-      14px 14px 0 -1px #e7eddf,
-      14px 14px 0 0 #bccbad;
+  :root {
+    --glass-blur: 14px;
+    --glass-radius: 14px;
   }
+  .signature-architecture {
+    box-shadow: var(--glass-shadow);
+  }
+}
+
+/* Brand colors stay distinct from the neutral interface palette. */
+[data-brand="React"] {
+  --brand-light: #006d86;
+  --brand-dark: #61dafb;
+}
+[data-brand="JavaScript"] {
+  --brand-light: #806300;
+  --brand-dark: #f7df1e;
+}
+[data-brand="Tailwind CSS"] {
+  --brand-light: #087b96;
+  --brand-dark: #38bdf8;
+}
+[data-brand="Bootstrap"] {
+  --brand-light: #7034bb;
+  --brand-dark: #b38aff;
+}
+[data-brand="ASP.NET"] {
+  --brand-light: #6633aa;
+  --brand-dark: #b995f4;
+}
+[data-brand="HTML5"] {
+  --brand-light: #b83c18;
+  --brand-dark: #ff906b;
+}
+[data-brand="CSS3"] {
+  --brand-light: #176cad;
+  --brand-dark: #6bbaf4;
+}
+[data-brand="Node.js"] {
+  --brand-light: #397c30;
+  --brand-dark: #83cc72;
+}
+[data-brand="C#"] {
+  --brand-light: #763ba1;
+  --brand-dark: #ca8def;
+}
+[data-brand="PostgreSQL"] {
+  --brand-light: #336791;
+  --brand-dark: #88b9df;
+}
+[data-brand="SQL Server"] {
+  --brand-light: #ac3034;
+  --brand-dark: #ef8589;
+}
+[data-brand="Supabase"] {
+  --brand-light: #187b53;
+  --brand-dark: #3ecf8e;
+}
+[data-brand="Azure"] {
+  --brand-light: #0073b5;
+  --brand-dark: #52baff;
+}
+[data-brand="Git"] {
+  --brand-light: #ba3c27;
+  --brand-dark: #f88a74;
+}
+[data-brand="Visual Studio"] {
+  --brand-light: #7939a5;
+  --brand-dark: #c294ea;
+}
+[data-brand="Visual Studio Code"] {
+  --brand-light: #0079b9;
+  --brand-dark: #54b9f1;
+}
+[data-brand="Figma"] {
+  --brand-light: #b83a29;
+  --brand-dark: #ff8b7b;
+}
+[data-brand="LinkedIn"] {
+  --brand-light: #0a66c2;
+  --brand-dark: #71b5f9;
+}
+
+.technology-item > span,
+.socials a[data-brand] {
+  color: var(--brand-dark, var(--text));
+}
+:root[data-theme="light"] .technology-item > span,
+:root[data-theme="light"] .socials a[data-brand] {
+  color: var(--brand-light, var(--text));
 }

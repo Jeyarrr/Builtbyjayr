@@ -27,7 +27,7 @@ const groups = [
   {
     label: "Database",
     text: "The foundation",
-    items: ["PostgreSQL", "SQL Server"],
+    items: ["PostgreSQL", "SQL Server", "Supabase"],
   },
   {
     label: "Deployment",
@@ -67,6 +67,7 @@ export default function Skills() {
                   {items.map((item) => (
                     <motion.div
                       className="technology-item"
+                      data-brand={item}
                       key={item}
                       tabIndex={0}
                       whileHover={interactive ? { y: -4 } : undefined}

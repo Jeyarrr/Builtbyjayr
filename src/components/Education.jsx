@@ -13,10 +13,14 @@ export default function Education() {
         </SectionHeading>
         <div className="education-list">
           {[
-            ["2022 — 2026", "BS Computer Science", "AISAT College Dasmariñas"],
             [
-              "2020 — 2022",
-              "TVL · Computer Programming",
+              "2022 — 2026",
+              "Bachelor of Science in Computer Science",
+              "AISAT College Dasmariñas",
+            ],
+            [
+              "2020 – 2022",
+              "Senior High School — TVL, ICT 2 (Computer Programming)",
               "AISAT College Dasmariñas",
             ],
             ["CERTIFICATION", "Responsive Web Design", "freeCodeCamp"],

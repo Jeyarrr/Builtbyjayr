@@ -24,7 +24,7 @@ export function ThemeProvider({ children }) {
     root.style.colorScheme = theme;
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#10130f" : "#f6f7f2");
+      ?.setAttribute("content", theme === "dark" ? "#090909" : "#f7f7f7");
   }, [theme]);
   useEffect(() => {
     const sync = (event) => {

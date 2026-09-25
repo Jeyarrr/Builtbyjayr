@@ -1,6 +1,6 @@
 # BuiltByJayr
 
-A responsive personal portfolio built with React, Vite, Bootstrap 5, Tailwind CSS 4, and Motion for React. The original graphite-and-lime design uses editorial typography and controlled motion, inspired by the quality goals in the MotionSites brief.
+A responsive personal portfolio built with React, Vite, Bootstrap 5, Tailwind CSS 4, and Motion for React. The black-and-white design pairs editorial typography with frosted glass surfaces and controlled motion.
 
 ## Run locally
 
@@ -28,6 +28,8 @@ TasteNet, JB Nav Enterprise, and JBank use real screenshots in `public/projects/
 Set `profile.email` to enable the contact form's email draft flow. Without an email, the form copies the inquiry and explicitly says nothing was sent. There is no backend or message storage. Social links appear when their URLs are supplied.
 
 ## Styling
+
+Adjust the dark and light token blocks at the top of `src/theme.css` to change colors, glass opacity, blur (`--glass-blur`), corners (`--glass-radius`), and shadows across the portfolio. Portraits and project screenshots retain their original colors (`--preview-filter: none`). Skill labels and social links use theme-aware brand colors. The theme toggle saves the visitor's choice and follows their system setting until they choose. Floating glass accents and pointer highlights respect the motion toggle and reduced-motion preference.
 
 Bootstrap supplies the responsive grid and form styles. Tailwind's theme and utilities are imported with a `tw` prefix and without Preflight to prevent conflicts with Bootstrap. Use utilities such as `tw:relative` or `tw:font-medium`. Existing visual foundations and illustration styles live in `src/styles.css`. The new editorial layouts, breakpoints, and interaction styles live in `src/motion.css`. Manrope is served locally through Fontsource; no third-party font request is needed.
 

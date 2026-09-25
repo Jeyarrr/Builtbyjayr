@@ -21,6 +21,8 @@ function DeveloperSignature() {
     targetY = useMotionValue(0);
   const rotateY = useSpring(targetX, { stiffness: 90, damping: 22 }),
     rotateX = useSpring(targetY, { stiffness: 90, damping: 22 });
+  const glassX = useTransform(rotateY, [-3.5, 3.5], ["0%", "100%"]);
+  const glassY = useTransform(rotateX, [-3.5, 3.5], ["100%", "0%"]);
   function move(event) {
     if (!interactive || event.pointerType !== "mouse") return;
     const box = event.currentTarget.getBoundingClientRect();
@@ -38,11 +40,17 @@ function DeveloperSignature() {
       aria-hidden="true"
     >
       <div className="architecture-grid" />
+      <span className="signature-orb signature-orb-one" />
+      <span className="signature-orb signature-orb-two" />
       <span className="stage-corner corner-tl">+</span>
       <span className="stage-corner corner-br">+</span>
       <motion.div
         className="signature-architecture"
-        style={interactive ? { rotateX, rotateY } : undefined}
+        style={
+          interactive
+            ? { rotateX, rotateY, "--glass-x": glassX, "--glass-y": glassY }
+            : undefined
+        }
       >
         <div className="signature-rail rail-one" />
         <div className="signature-rail rail-two" />

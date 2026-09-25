@@ -4,9 +4,9 @@
   --motion-fast: 200ms;
   --motion-ui: 350ms;
   --bs-body-font-family: "Manrope Variable", Arial, sans-serif;
-  --bg: #10130f;
-  --bs-body-bg: #10130f;
-  --lime: #c8ef91;
+  --bg: #090909;
+  --bs-body-bg: #090909;
+  --lime: #ffffff;
 }
 body {
   font-family: var(--bs-body-font-family);

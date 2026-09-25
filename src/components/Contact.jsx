@@ -61,13 +61,23 @@ export default function Contact() {
               )}
               <div className="socials">
                 {profile.github && (
-                  <a href={profile.github} target="_blank" rel="noreferrer">
+                  <a
+                    data-brand="GitHub"
+                    href={profile.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <BrandIcon name="GitHub" size={18} /> GitHub{" "}
                     <ArrowUpRight size={14} />
                   </a>
                 )}
                 {profile.linkedin && (
-                  <a href={profile.linkedin} target="_blank" rel="noreferrer">
+                  <a
+                    data-brand="LinkedIn"
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <BrandIcon name="LinkedIn" size={18} /> LinkedIn{" "}
                     <ArrowUpRight size={14} />
                   </a>
