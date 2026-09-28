@@ -760,3 +760,131 @@ body,
 :root[data-theme="light"] .socials a[data-brand] {
   color: var(--brand-light, var(--text));
 }
+
+/* Internship portrait and a continuous left-to-right technology showcase. */
+.project-techora .techora-screenshot,
+.project-dialog .techora-screenshot {
+  height: auto;
+  aspect-ratio: 1897 / 910;
+}
+.techora-screenshot img {
+  object-fit: contain;
+  object-position: center;
+}
+.internship-photo {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--glass-radius);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  max-width: 320px;
+}
+.internship-portrait {
+  position: relative;
+  min-width: 0;
+}
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.experience-header h3 {
+  margin-bottom: 0;
+}
+.experience-meta {
+  flex-shrink: 0;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .experience-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+  .experience-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+  .experience-meta small {
+    margin-top: 0;
+  }
+}
+.internship-photo-visual {
+  overflow: hidden;
+  background: #ffffff;
+}
+.internship-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  object-position: center;
+}
+.internship-photo figcaption {
+  padding: 14px 16px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+.tech-marquee {
+  overflow: hidden;
+  margin: 0 0 38px;
+  padding: 20px 0;
+  border-block: 1px solid var(--border);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+.tech-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: tech-scroll-right 65s linear infinite;
+}
+.tech-marquee-set {
+  display: flex;
+  flex-shrink: 0;
+  gap: 16px;
+  padding-right: 16px;
+}
+.tech-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 12px;
+  background: var(--glass-bg);
+  color: var(--brand-dark, var(--text));
+  font-size: 12px;
+  white-space: nowrap;
+}
+:root[data-theme="light"] .tech-marquee-item {
+  color: var(--brand-light, var(--text));
+}
+.tech-marquee:hover .tech-marquee-track,
+[data-motion="reduced"] .tech-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes tech-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-track {
+    animation: none;
+  }
+}

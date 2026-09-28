@@ -40,6 +40,7 @@ const groups = [
     items: ["Git", "GitHub", "Visual Studio", "Visual Studio Code", "Figma"],
   },
 ];
+const technologies = [...new Set(groups.flatMap(({ items }) => items))];
 export default function Skills() {
   const { reduced, interactive } = useMotionSettings();
   return (
@@ -52,6 +53,24 @@ export default function Skills() {
         >
           Full stack. <span className="serif-accent">Considered choices.</span>
         </SectionHeading>
+        <div className="tech-marquee" aria-hidden="true">
+          <div className="tech-marquee-track">
+            {[0, 1].map((copy) => (
+              <div className="tech-marquee-set" key={copy}>
+                {technologies.map((name) => (
+                  <div
+                    className="tech-marquee-item"
+                    data-brand={name}
+                    key={name}
+                  >
+                    <BrandIcon name={name} size={32} />
+                    <span>{name}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="technology-groups">
           {groups.map(({ label, text, items }, i) => (
             <Reveal key={label} delay={i * 0.045}>

@@ -31,7 +31,30 @@ export const projects = [
     color: "techora-blue",
     url: "https://techora-store.vercel.app/",
     github: "https://github.com/Jeyarrr/TechOra",
-    image: "",
+    image: "/projects/techora/home.png",
+    gallery: [
+      {
+        src: "/projects/techora/home.png",
+        label: "Storefront",
+        alt: "TechOra storefront with technology products and shopping navigation",
+        width: 1897,
+        height: 910,
+      },
+      {
+        src: "/projects/techora/sign-in.png",
+        label: "Sign in",
+        alt: "TechOra customer sign-in dialog",
+        width: 1917,
+        height: 907,
+      },
+      {
+        src: "/projects/techora/admin-dashboard.png",
+        label: "Admin dashboard",
+        alt: "TechOra admin dashboard with revenue, orders, products, and customers",
+        width: 1917,
+        height: 901,
+      },
+    ],
     summary:
       "A full-stack technology e-commerce platform with customer shopping, order tracking, product reviews, and an admin management dashboard. Built with React and Vite on the frontend, Node.js and Express on the backend, and PostgreSQL for data storage.",
     features: [

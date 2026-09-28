@@ -8,7 +8,7 @@ import {
 } from "../motion/MotionSystem";
 
 export default function ExperienceTimeline() {
-  const { reduced } = useMotionSettings();
+  const { reduced, interactive } = useMotionSettings();
   return (
     <section id="experience" className="experience-section section-space">
       <div className="container">
@@ -28,19 +28,46 @@ export default function ExperienceTimeline() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: reduced ? 0 : 0.8, ease: timing.ease }}
           />
-          <Reveal className="timeline-date">
+          <Reveal className="internship-portrait">
             <span className="timeline-dot" />
-            <span>2025</span>
-            <small>500 HOURS / INTERNSHIP</small>
+            <motion.figure
+              className="internship-photo"
+              initial={reduced ? false : { clipPath: "inset(0% 0% 12% 0%)" }}
+              whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+              viewport={{ once: true }}
+              transition={{ duration: reduced ? 0 : 0.7 }}
+            >
+              <div className="internship-photo-visual">
+                <motion.img
+                  src="/experience/viotech-portrait.png"
+                  alt="Jay-r Casano wearing his Viotech uniform during his internship"
+                  width="941"
+                  height="1255"
+                  loading="lazy"
+                  initial={reduced ? false : { y: 18, scale: 1.03 }}
+                  whileInView={reduced ? undefined : { y: 0, scale: 1 }}
+                  whileHover={interactive ? { y: -8, scale: 1.035 } : undefined}
+                  viewport={{ once: true }}
+                  transition={{ duration: reduced ? 0 : 0.75, ease: "easeOut" }}
+                />
+              </div>
+              <figcaption>At Viotech I.T. Solutions</figcaption>
+            </motion.figure>
           </Reveal>
           <div className="timeline-content">
-            <Reveal delay={0.07}>
-              <span className="eyebrow">VIOTECH I.T. SOLUTIONS</span>
-              <h3>
-                Associate ASP.NET Developer
-                <br />
-                <span>& IT Support Intern</span>
-              </h3>
+            <Reveal delay={0.07} className="experience-header">
+              <div>
+                <span className="eyebrow">VIOTECH I.T. SOLUTIONS</span>
+                <h3>
+                  Associate ASP.NET Developer
+                  <br />
+                  <span>& IT Support Intern</span>
+                </h3>
+              </div>
+              <div className="timeline-date experience-meta">
+                <span>2025</span>
+                <small>500 HOURS / INTERNSHIP</small>
+              </div>
             </Reveal>
             <div className="timeline-responsibilities">
               {[
