@@ -395,13 +395,19 @@ describe("portfolio interactions", () => {
       screen
         .getByRole("group", { name: "JB Nav Enterprise screenshots" })
         .querySelectorAll("button"),
-    ).toHaveLength(6);
+    ).toHaveLength(7);
     await user.click(
       screen.getByRole("button", {
         name: "Show JB Nav Enterprise Gallery screenshot",
       }),
     );
     expect(screenshot()).toBe("/projects/jbnav/gallery.png");
+    await user.click(
+      screen.getByRole("button", {
+        name: "Show JB Nav Enterprise Reviews screenshot",
+      }),
+    );
+    expect(screenshot()).toBe("/projects/jbnav/reviews.png");
   });
 
   it("closes mobile navigation after choosing a section", async () => {
