@@ -256,7 +256,7 @@ function ProjectDialog({ project, onClose }) {
         )}
         <div className="dialog-copy">
           <span className="eyebrow">{project.label}</span>
-          <h2 id="project-title">{project.name}</h2>
+          <h2 id="project-title">{project.title || project.name}</h2>
           <p>{project.summary}</p>
           {!project.image && (
             <p className="preview-note">

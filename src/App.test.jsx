@@ -348,7 +348,7 @@ describe("portfolio interactions", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
-  it("shows all TasteNet screenshots and cycles through the gallery", async () => {
+  it("shows the TasteNet thesis gallery with its live demo and original source links", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(
@@ -357,26 +357,47 @@ describe("portfolio interactions", () => {
     const dialog = screen.getByRole("dialog");
     const screenshot = () =>
       dialog.querySelector(".project-art img").getAttribute("src");
-    expect(screenshot()).toBe("/projects/tastenet/home.png");
+    expect(screenshot()).toBe("/projects/tastenet-pern/home.png");
+    expect(screen.getByRole("link", { name: /Visit project/ }).href).toBe(
+      "https://tastenet-caballeros.vercel.app/",
+    );
+    expect(screen.getByRole("link", { name: /View source/ }).href).toBe(
+      "https://github.com/Jeyarrr/TasteNet",
+    );
     expect(
       screen
         .getByRole("group", { name: "TASTENET screenshots" })
         .querySelectorAll("button"),
-    ).toHaveLength(16);
+    ).toHaveLength(10);
     await user.click(
       screen.getByRole("button", { name: "Next TASTENET screenshot" }),
     );
-    expect(screenshot()).toBe("/projects/tastenet/sign-in.png");
+    expect(screenshot()).toBe("/projects/tastenet-pern/menu.png");
+    await user.click(
+      screen.getByRole("button", { name: "Show TASTENET Sign in screenshot" }),
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Next TASTENET screenshot" }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet-pern/sign-up.png");
+    await user.click(
+      screen.getByRole("button", { name: "Show TASTENET Admin account screenshot" }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet-pern/admin-inventory.png");
+    await user.click(
+      screen.getByRole("button", { name: "Show TASTENET Superadmin account screenshot" }),
+    );
+    expect(screenshot()).toBe("/projects/tastenet-pern/superadmin-dashboard.png");
     await user.click(
       screen.getByRole("button", {
-        name: "Show TASTENET Rider profile screenshot",
+        name: "Show TASTENET Superadmin account screenshot",
       }),
     );
-    expect(screenshot()).toBe("/projects/tastenet/rider-profile.png");
+    expect(screenshot()).toBe("/projects/tastenet-pern/superadmin-dashboard.png");
     await user.click(
       screen.getByRole("button", { name: "Next TASTENET screenshot" }),
     );
-    expect(screenshot()).toBe("/projects/tastenet/home.png");
+    expect(screenshot()).toBe("/projects/tastenet-pern/home.png");
   });
 
   it("shows the JB Nav Enterprise screenshots in its project gallery", async () => {

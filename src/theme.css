@@ -628,6 +628,21 @@ body,
 .project-dialog .screenshot-art {
   background: var(--surface-raised);
 }
+.project-dialog .project-art.tastenet-screenshot {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1890 / 820;
+  background: #201a1a;
+}
+.project-dialog .tastenet-screenshot img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .contact-section {
   background:
     radial-gradient(ellipse at 75% 45%, var(--ambient), transparent 65%),
