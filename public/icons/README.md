@@ -6,3 +6,5 @@ Only the required marks are served locally. `scripts/download-brand-icons.mjs` r
 
 Colored marks keep their colors in both themes. Monochrome GitHub, Express, and Vercel marks switch to white in dark mode for visibility.
 Visual Studio and Visual Studio Code have separate marks.
+
+TypeScript also uses Devicon v2.17.0. Neon uses the [Simple Icons Neon mark](https://github.com/simple-icons/simple-icons/blob/develop/icons/neon.svg) (CC0), colored green for this interface. ChatGPT and Codex share the OpenAI mark from [Lobe Icons](https://github.com/lobehub/lobe-icons/blob/master/packages/static-svg/icons/openai.svg); its license is included in `OPENAI-ICON-LICENSE.txt`. The shared OpenAI mark adapts to light and dark themes.

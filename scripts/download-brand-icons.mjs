@@ -15,6 +15,7 @@ const icons = {
   vscode: 'vscode/vscode-original.svg',
   linkedin: 'linkedin/linkedin-original.svg',
   supabase: 'supabase/supabase-original.svg',
+  typescript: 'typescript/typescript-original.svg',
 };
 await mkdir('public/icons', { recursive: true });
 const results = await Promise.allSettled(Object.entries(icons).map(async ([name, source]) => {

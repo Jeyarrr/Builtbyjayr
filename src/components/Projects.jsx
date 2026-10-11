@@ -22,7 +22,7 @@ import {
   useMotionSettings,
 } from "../motion/MotionSystem";
 
-const filters = ["All work", "Web apps", "Websites", "UI / UX"];
+const filters = ["All work", ...new Set(projects.map((project) => project.type))];
 
 function ProjectVisual({ project, image = project.image, alt }) {
   const [failed, setFailed] = useState(false);
@@ -61,7 +61,7 @@ function ProjectCard({ project, index, onOpen, ref }) {
     <motion.article
       ref={ref}
       layout={reduced ? false : "position"}
-      className={`showcase-card ${project.featured ? "featured-project" : ""} project-${project.id}`}
+      className={`showcase-card project-${project.id}`}
       initial={reduced ? false : { opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       exit={reduced ? undefined : { opacity: 0, y: -10 }}

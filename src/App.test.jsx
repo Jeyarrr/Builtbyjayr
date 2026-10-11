@@ -279,19 +279,20 @@ describe("portfolio interactions", () => {
     await waitFor(() =>
       expect(
         screen.getAllByRole("button", { name: /project details/ }),
-      ).toHaveLength(2),
+      ).toHaveLength(3),
     );
     expect(
       screen.getByRole("button", { name: "View TASTENET project details" }),
     ).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "UI / UX" }));
+    expect(screen.queryByRole("button", { name: "View JBank project details" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Websites" }));
     await waitFor(() =>
       expect(
         screen.getAllByRole("button", { name: /project details/ }),
       ).toHaveLength(1),
     );
     expect(
-      screen.getByRole("button", { name: "View JBank project details" }),
+      screen.getByRole("button", { name: "View JB Nav Enterprise project details" }),
     ).toBeTruthy();
     await user.click(screen.getByRole("button", { name: /All work/ }));
     expect(
@@ -307,26 +308,18 @@ describe("portfolio interactions", () => {
       </React.StrictMode>,
     );
     const trigger = screen.getByRole("button", {
-      name: "View JBank project details",
+      name: "View VioTech I.T. Solutions eDTR project details",
     });
     await user.click(trigger);
     expect(screen.getByRole("dialog").open).toBe(true);
     expect(document.body.style.overflow).toBe("hidden");
     const dialog = screen.getByRole("dialog");
     expect(dialog.querySelector(".project-art img").getAttribute("src")).toBe(
-      "/projects/jbank-overview.png",
-    );
-    await user.click(
-      screen.getByRole("button", {
-        name: "Show JBank Banking flows screenshot",
-      }),
-    );
-    expect(dialog.querySelector(".project-art img").getAttribute("src")).toBe(
-      "/projects/jbank-transfers.png",
+      "/projects/viotech-edtr/sign-in.png",
     );
     expect(
-      screen.getByRole("link", { name: /View Figma prototype/ }).href,
-    ).toContain("figma.com/proto/");
+      screen.getByRole("link", { name: /Visit project/ }).href,
+    ).toBe("https://edtr-indol.vercel.app/");
     await user.click(
       screen.getByRole("button", { name: "Close project details" }),
     );

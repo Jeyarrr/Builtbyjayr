@@ -628,14 +628,16 @@ body,
 .project-dialog .screenshot-art {
   background: var(--surface-raised);
 }
-.project-dialog .project-art.tastenet-screenshot {
+.project-dialog .project-art.tastenet-screenshot,
+.project-dialog .project-art.viotech-edtr-screenshot {
   position: relative;
   height: auto;
   min-height: 0;
   aspect-ratio: 1890 / 820;
   background: #201a1a;
 }
-.project-dialog .tastenet-screenshot img {
+.project-dialog .tastenet-screenshot img,
+.project-dialog .viotech-edtr-screenshot img {
   position: absolute;
   inset: 0;
   display: block;
@@ -701,6 +703,22 @@ body,
 [data-brand="JavaScript"] {
   --brand-light: #806300;
   --brand-dark: #f7df1e;
+}
+[data-brand="TypeScript"] {
+  --brand-light: #2565a3;
+  --brand-dark: #74b7f5;
+}
+[data-brand="Neon Postgres"] {
+  --brand-light: #087c62;
+  --brand-dark: #00e5a4;
+}
+[data-brand="ChatGPT"] {
+  --brand-light: #087f68;
+  --brand-dark: #6ee7c7;
+}
+[data-brand="Codex"] {
+  --brand-light: #6543aa;
+  --brand-dark: #b9a0f3;
 }
 [data-brand="Tailwind CSS"] {
   --brand-light: #087b96;
@@ -902,4 +920,44 @@ body,
   .tech-marquee-track {
     animation: none;
   }
+}
+
+/* Equal project cards keep featured badges without leaving empty grid cells. */
+.showcase-grid .showcase-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.showcase-grid .project-image-reveal,
+.showcase-grid .showcase-copy {
+  order: initial;
+}
+.showcase-grid .showcase-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0 0;
+}
+.showcase-grid .showcase-copy > :last-child {
+  margin-top: auto;
+}
+.showcase-grid .showcase-copy h3 {
+  font-size: clamp(25px, 2.4vw, 36px);
+  letter-spacing: -1.4px;
+}
+.showcase-grid .showcase-copy p {
+  max-width: none;
+}
+.showcase-grid .showcase-card .screenshot-art {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1905 / 906;
+  background: var(--surface-raised);
+}
+.showcase-grid .screenshot-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }

@@ -115,6 +115,51 @@ export const projects = [
     ],
   },
   {
+    id: "viotech-edtr",
+    name: "VioTech I.T. Solutions eDTR",
+    type: "Web apps",
+    label: "ATTENDANCE & PAYROLL MANAGEMENT",
+    description:
+      "Paperless employee timekeeping for VioTech I.T. Solutions, connecting daily attendance, schedules, requests, and payroll in one workspace.",
+    tags: ["React", "TypeScript", "Express", "Node.js", "PostgreSQL"],
+    color: "sand",
+    url: "https://edtr-indol.vercel.app/",
+    github: "https://github.com/Jeyarrr/eDTR",
+    image: "/projects/viotech-edtr/sign-in.png",
+    gallery: [
+      {
+        src: "/projects/viotech-edtr/sign-in.png",
+        label: "Sign in",
+        alt: "VioTech I.T. Solutions electronic daily time record sign-in screen",
+        width: 1905,
+        height: 906,
+      },
+      ...[
+        ["admin-dashboard", "Admin dashboard", "Attendance overview and employee activity"],
+        ["attendance", "Attendance", "Admin attendance management and verification"],
+        ["user-management", "User management", "Employee accounts and role management"],
+        ["payroll", "Payroll", "Payroll periods and review workspace"],
+        ["work-schedules", "Work schedules", "Employee schedules and working hours"],
+        ["employee-dashboard", "Employee dashboard", "Employee timekeeping dashboard"],
+        ["employee-dtr", "Employee DTR", "Employee daily time record and calendar"],
+      ].map(([file, label, description]) => ({
+        src: `/projects/viotech-edtr/${file}.png`,
+        label,
+        alt: `VioTech eDTR: ${description}`,
+        width: 1905,
+        height: 906,
+      })),
+    ],
+    summary:
+      "An Electronic Daily Time Record system for VioTech I.T. Solutions, built with React and TypeScript, Express, Node.js, and PostgreSQL. It supports employee timekeeping, attendance verification, schedules, leave and correction requests, and payroll workflows.",
+    features: [
+      "Employee clock-in/out and daily time records",
+      "Admin and HR attendance verification and scheduling",
+      "Leave and correction request reviews",
+      "Payroll review, payslips, and PDF/Excel exports",
+    ],
+  },
+  {
     id: "techora",
     name: "TechOra",
     type: "Web apps",
@@ -227,41 +272,6 @@ export const projects = [
       "Service and event presentation",
       "Responsive layouts",
       "Clear paths to customer inquiries",
-    ],
-  },
-  {
-    id: "jbank",
-    name: "JBank",
-    type: "UI / UX",
-    label: "MOBILE BANKING EXPERIENCE",
-    description:
-      "Everyday banking, thoughtfully designed. A mobile experience focused on clarity, confidence, and ease of use.",
-    tags: ["Figma", "UI / UX", "Prototyping"],
-    color: "green",
-    image: "/projects/jbank-overview.png",
-    gallery: [
-      {
-        src: "/projects/jbank-overview.png",
-        label: "Overview",
-        alt: "JBank welcome, sign-up, home, and investment screen designs",
-        width: 1294,
-        height: 714,
-      },
-      {
-        src: "/projects/jbank-transfers.png",
-        label: "Banking flows",
-        alt: "JBank transfer, pay and e-wallet, and profile screen designs",
-        width: 991,
-        height: 708,
-      },
-    ],
-    url: "https://www.figma.com/proto/qfXGW9uZCLZubzEPDtqDV8?node-id=0-1&t=WGB5T80IAi4NUXnd-6",
-    summary:
-      "A mobile banking application design created in Figma, exploring a secure, intuitive, and user-focused experience. Includes a design system and prototypes for core banking functions.",
-    features: [
-      "Mobile banking interface design",
-      "Reusable design system",
-      "Interactive banking prototypes",
     ],
   },
 ];

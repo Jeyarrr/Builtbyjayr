@@ -12,6 +12,7 @@ const groups = [
     items: [
       "React",
       "JavaScript",
+      "TypeScript",
       "Tailwind CSS",
       "Bootstrap",
       "ASP.NET",
@@ -32,12 +33,17 @@ const groups = [
   {
     label: "Deployment",
     text: "Out in the world",
-    items: ["Azure", "Vercel", "GitHub Pages"],
+    items: ["Azure", "Vercel", "GitHub Pages", "Neon Postgres"],
   },
   {
     label: "Tools",
     text: "The everyday kit",
     items: ["Git", "GitHub", "Visual Studio", "Visual Studio Code", "Figma"],
+  },
+  {
+    label: "AI Assistance",
+    text: "Support for the workflow",
+    items: ["ChatGPT", "Codex"],
   },
 ];
 const technologies = [...new Set(groups.flatMap(({ items }) => items))];
