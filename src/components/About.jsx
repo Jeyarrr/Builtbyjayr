@@ -1,3 +1,4 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { Code2, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import {
@@ -11,7 +12,7 @@ export default function About() {
   const { reduced, interactive } = useMotionSettings();
 
   return (
-    <section id="about" className="about-section section-space">
+    <UnfoldSection id="about" className="about-section section-space">
       <div className="container">
         <SectionHeading
           number="01"
@@ -97,6 +98,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </section>
+    </UnfoldSection>
   );
 }

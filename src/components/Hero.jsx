@@ -39,6 +39,15 @@ function DeveloperSignature() {
       }}
       aria-hidden="true"
     >
+      <div className="hero-portrait-halo" />
+      <img
+        className="hero-showcase-portrait"
+        src="/jayr-cutout.png"
+        alt=""
+        width="1086"
+        height="1448"
+        fetchPriority="high"
+      />
       <div className="architecture-grid" />
       <span className="signature-orb signature-orb-one" />
       <span className="signature-orb signature-orb-two" />

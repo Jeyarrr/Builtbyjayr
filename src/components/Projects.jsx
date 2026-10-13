@@ -1,3 +1,4 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
@@ -311,7 +312,7 @@ export default function Projects() {
     (project) => filter === "All work" || project.type === filter,
   );
   return (
-    <section id="work" className="work-section section-space">
+    <UnfoldSection id="work" className="work-section section-space">
       <div className="container">
         <SectionHeading
           number="03"
@@ -363,6 +364,6 @@ export default function Projects() {
       {selected && (
         <ProjectDialog project={selected} onClose={() => setSelected(null)} />
       )}
-    </section>
+    </UnfoldSection>
   );
 }

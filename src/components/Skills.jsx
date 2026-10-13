@@ -1,3 +1,4 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { motion } from "motion/react";
 import BrandIcon from "./BrandIcon";
 import {
@@ -50,7 +51,7 @@ const technologies = [...new Set(groups.flatMap(({ items }) => items))];
 export default function Skills() {
   const { reduced, interactive } = useMotionSettings();
   return (
-    <section id="skills" className="skills-section section-space">
+    <UnfoldSection id="skills" className="skills-section section-space">
       <div className="container">
         <SectionHeading
           number="04"
@@ -110,6 +111,6 @@ export default function Skills() {
           ))}
         </div>
       </div>
-    </section>
+    </UnfoldSection>
   );
 }

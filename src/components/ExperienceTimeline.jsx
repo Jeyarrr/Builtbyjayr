@@ -1,3 +1,4 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import {
@@ -10,7 +11,7 @@ import {
 export default function ExperienceTimeline() {
   const { reduced, interactive } = useMotionSettings();
   return (
-    <section id="experience" className="experience-section section-space">
+    <UnfoldSection id="experience" className="experience-section section-space">
       <div className="container">
         <SectionHeading
           number="02"
@@ -102,6 +103,6 @@ export default function ExperienceTimeline() {
           </div>
         </div>
       </div>
-    </section>
+    </UnfoldSection>
   );
 }

@@ -89,6 +89,39 @@ export function MotionProvider({ children }) {
 
 export const useMotionSettings = () => useContext(MotionContext);
 
+// Measure the stationary section, so transforming its contents cannot feed back
+// into scroll progress. Long sections stay flat once their opening is visible.
+export function UnfoldSection({ children, className = "", ...props }) {
+  const ref = useRef(null);
+  const { reduced } = useMotionSettings();
+  const [focused, setFocused] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start 25%"],
+  });
+  const rotateX = useTransform(scrollYProgress, [0, 1], [14, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [65, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.65, 1], [0.35, 1, 1]);
+  const staticView = reduced || focused;
+  return (
+    <section ref={ref} className={`unfold-section ${className}`} {...props}>
+      <motion.div
+        className="unfold-surface"
+        onFocusCapture={() => setFocused(true)}
+        style={{
+          rotateX: staticView ? 0 : rotateX,
+          y: staticView ? 0 : y,
+          scale: staticView ? 1 : scale,
+          opacity: staticView ? 1 : opacity,
+        }}
+      >
+        {children}
+      </motion.div>
+    </section>
+  );
+}
+
 export function Reveal({
   children,
   className = "",

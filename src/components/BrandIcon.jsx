@@ -4,7 +4,7 @@ const icons = {
   TypeScript: "typescript",
   "Neon Postgres": "neon",
   ChatGPT: "openai",
-  Codex: "openai",
+  Codex: "codex",
   "Tailwind CSS": "tailwindcss",
   Bootstrap: "bootstrap",
   HTML5: "html5",
@@ -26,7 +26,7 @@ const icons = {
   Figma: "figma",
   LinkedIn: "linkedin",
 };
-const monochrome = new Set(["express", "github", "vercel", "openai"]);
+const monochrome = new Set(["express", "github", "vercel", "openai", "codex"]);
 
 export default function BrandIcon({ name, size = 22 }) {
   const icon = icons[name];

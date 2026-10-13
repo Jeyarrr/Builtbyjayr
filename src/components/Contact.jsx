@@ -1,3 +1,4 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { useState } from "react";
 import { Sparkles, ArrowUpRight, Send, Copy } from "lucide-react";
 import { profile } from "../content";
@@ -30,7 +31,7 @@ export default function Contact() {
     }
   }
   return (
-    <section id="contact" className="contact-section section-space">
+    <UnfoldSection id="contact" className="contact-section section-space">
       <div className="container">
         <Reveal>
           <div className="row g-5 align-items-center">
@@ -153,6 +154,6 @@ export default function Contact() {
           </div>
         </Reveal>
       </div>
-    </section>
+    </UnfoldSection>
   );
 }

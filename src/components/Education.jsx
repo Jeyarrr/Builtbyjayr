@@ -1,8 +1,9 @@
+import { UnfoldSection } from "../motion/MotionSystem";
 import { GraduationCap, ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeading } from "../motion/MotionSystem";
 export default function Education() {
   return (
-    <section id="education" className="education-section section-space">
+    <UnfoldSection id="education" className="education-section section-space">
       <div className="container">
         <SectionHeading
           number="05"
@@ -39,6 +40,6 @@ export default function Education() {
           ))}
         </div>
       </div>
-    </section>
+    </UnfoldSection>
   );
 }
