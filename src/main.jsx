@@ -13,3 +13,4 @@ createRoot(document.getElementById("root")).render(
   </React.StrictMode>,
 );
 import "./showcase.css";
+import "./room-pillar.css";

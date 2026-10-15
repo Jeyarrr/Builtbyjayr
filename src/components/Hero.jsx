@@ -196,9 +196,6 @@ export default function Hero() {
             className="col-lg-8 hero-copy"
             style={interactive ? { y: copyY, opacity } : undefined}
           >
-            <motion.p {...enter(0.1)} className="hero-intro">
-              Jayr Casano. Full-Stack Developer.
-            </motion.p>
             <RevealText
               as="h1"
               ariaLabel="I build software for the web."

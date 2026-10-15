@@ -58,18 +58,6 @@ export default function About() {
                 </span>
               </motion.div>
             </Reveal>
-          </div>
-          <div className="col-lg-7 about-copy">
-            <Reveal delay={0.08}>
-              <h3 className="about-statement">
-                Thoughtful interfaces.
-                <br />
-                <span>Dependable systems.</span>
-              </h3>
-              {profile.about.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </Reveal>
             <Reveal delay={0.16}>
               <div className="developer-note">
                 <div className="code-note-label">
@@ -91,6 +79,20 @@ export default function About() {
                   </code>
                 </pre>
               </div>
+            </Reveal>
+          </div>
+          <div className="col-lg-7 about-copy">
+            <Reveal delay={0.08}>
+              <h3 className="about-statement">
+                Thoughtful interfaces.
+                <br />
+                <span>Dependable systems.</span>
+              </h3>
+              {profile.about.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </Reveal>
+            <Reveal delay={0.16}>
               <a href="#experience" className="text-button">
                 The experience behind the work <ArrowUpRight size={16} />
               </a>
