@@ -274,4 +274,41 @@ export const projects = [
       "Clear paths to customer inquiries",
     ],
   },
+  {
+    id: "furniture-deals-dasma",
+    name: "Furniture DEALS Dasma",
+    type: "Websites",
+    label: "FURNITURE SHOWROOM & CATALOG",
+    description:
+      "A digital showroom that helps customers discover furniture, save favorite pieces, and prepare inquiries for the Dasma store.",
+    tags: ["React", "JavaScript", "CSS", "Vite"],
+    color: "sand",
+    url: "https://furniture-deals-dasma.vercel.app/",
+    github: "https://github.com/Jeyarrr/furniture-deals-dasma",
+    image: "/projects/furniture-deals-dasma/home.png",
+    gallery: [
+      ["home", "Home", "Showroom homepage with the store exterior and furniture introduction"],
+      ["categories", "Categories", "Furniture categories and featured pieces"],
+      ["shop", "Furniture catalog", "Searchable furniture catalog with category filters and sorting"],
+      ["collections", "Collections", "Signature furniture collections and room inspiration"],
+      ["product-details", "Product details", "Furniture detail dialog with photos and inquiry quantity"],
+      ["inquiry", "Inquiry list", "Saved furniture inquiry list with quantity controls"],
+      ["about", "Showroom & FAQ", "Dasma showroom information and frequently asked questions"],
+      ["contact", "Contact", "Showroom contact details and inquiry preparation form"],
+    ].map(([file, label, description]) => ({
+      src: `/projects/furniture-deals-dasma/${file}.png`,
+      label,
+      alt: `Furniture DEALS Dasma: ${description}`,
+      width: 1905,
+      height: 906,
+    })),
+    summary:
+      "A responsive React furniture showroom featuring a searchable catalog, room collections, product detail dialogs, and saved favorites. Customers can build an inquiry list and prepare a message to send through the showroom's Facebook page.",
+    features: [
+      "Search, category filters, and furniture sorting",
+      "Product photos, details, and saved favorites",
+      "Inquiry lists with quantity controls and prepared messages",
+      "Showroom directions, opening hours, and contact information",
+    ],
+  },
 ];

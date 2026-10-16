@@ -274,7 +274,7 @@ describe("portfolio interactions", () => {
     render(<App />);
     expect(
       screen.getAllByRole("button", { name: /project details/ }),
-    ).toHaveLength(4);
+    ).toHaveLength(5);
     await user.click(screen.getByRole("button", { name: "Web apps" }));
     await waitFor(() =>
       expect(
@@ -289,7 +289,7 @@ describe("portfolio interactions", () => {
     await waitFor(() =>
       expect(
         screen.getAllByRole("button", { name: /project details/ }),
-      ).toHaveLength(1),
+      ).toHaveLength(2),
     );
     expect(
       screen.getByRole("button", { name: "View JB Nav Enterprise project details" }),
@@ -297,7 +297,7 @@ describe("portfolio interactions", () => {
     await user.click(screen.getByRole("button", { name: /All work/ }));
     expect(
       screen.getAllByRole("button", { name: /project details/ }),
-    ).toHaveLength(4);
+    ).toHaveLength(5);
   });
 
   it("opens project details, exposes its real link, and restores focus when closed", async () => {

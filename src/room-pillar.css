@@ -658,3 +658,17 @@ html {
     transform: none;
   }
 }
+
+.project-dialog .project-art.furniture-deals-dasma-screenshot {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1905 / 906;
+  background: #f5f3ee;
+}
+.project-dialog .furniture-deals-dasma-screenshot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
