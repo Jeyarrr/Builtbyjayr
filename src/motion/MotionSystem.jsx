@@ -99,10 +99,9 @@ export function UnfoldSection({ children, className = "", ...props }) {
     target: ref,
     offset: ["start end", "start 25%"],
   });
-  const rotateX = useTransform(scrollYProgress, [0, 1], [14, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [65, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.65, 1], [0.35, 1, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [28, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.985, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.65, 1], [0.6, 1, 1]);
   const staticView = reduced || focused;
   return (
     <section ref={ref} className={`unfold-section ${className}`} {...props}>
@@ -110,7 +109,6 @@ export function UnfoldSection({ children, className = "", ...props }) {
         className="unfold-surface"
         onFocusCapture={() => setFocused(true)}
         style={{
-          rotateX: staticView ? 0 : rotateX,
           y: staticView ? 0 : y,
           scale: staticView ? 1 : scale,
           opacity: staticView ? 1 : opacity,

@@ -1,6 +1,7 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import {
   motion,
+  useInView,
   useMotionValue,
   useScroll,
   useSpring,
@@ -15,206 +16,93 @@ import {
 } from "../motion/MotionSystem";
 import { profile } from "../content";
 
-function DeveloperSignature() {
-  const { reduced, interactive } = useMotionSettings();
-  const targetX = useMotionValue(0),
-    targetY = useMotionValue(0);
-  const rotateY = useSpring(targetX, { stiffness: 90, damping: 22 }),
-    rotateX = useSpring(targetY, { stiffness: 90, damping: 22 });
-  const glassX = useTransform(rotateY, [-3.5, 3.5], ["0%", "100%"]);
-  const glassY = useTransform(rotateX, [-3.5, 3.5], ["100%", "0%"]);
-  function move(event) {
-    if (!interactive || event.pointerType !== "mouse") return;
-    const box = event.currentTarget.getBoundingClientRect();
-    targetX.set(((event.clientX - box.left) / box.width - 0.5) * 7);
-    targetY.set(-((event.clientY - box.top) / box.height - 0.5) * 7);
-  }
-  return (
-    <div
-      className="signature-stage"
-      onPointerMove={move}
-      onPointerLeave={() => {
-        targetX.set(0);
-        targetY.set(0);
-      }}
-      aria-hidden="true"
-    >
-      <div className="hero-portrait-halo" />
-      <img
-        className="hero-showcase-portrait"
-        src="/jayr-cutout.png"
-        alt=""
-        width="1086"
-        height="1448"
-        fetchPriority="high"
-      />
-      <div className="architecture-grid" />
-      <span className="signature-orb signature-orb-one" />
-      <span className="signature-orb signature-orb-two" />
-      <span className="stage-corner corner-tl">+</span>
-      <span className="stage-corner corner-br">+</span>
-      <motion.div
-        className="signature-architecture"
-        style={
-          interactive
-            ? { rotateX, rotateY, "--glass-x": glassX, "--glass-y": glassY }
-            : undefined
-        }
-      >
-        <div className="signature-rail rail-one" />
-        <div className="signature-rail rail-two" />
-        <div className="signature-caption">
-          <span>01 / DEVELOPER SIGNATURE</span>
-          <Code2 size={15} />
-        </div>
-        <div className="signature-lockup">
-          <motion.span
-            className="signature-brace"
-            initial={reduced ? false : { x: -30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{
-              delay: reduced ? 0 : 0.4,
-              duration: reduced ? 0 : 0.55,
-              ease: timing.ease,
-            }}
-          >
-            {"{"}
-          </motion.span>
-          <div className="signature-name">
-            {["Built", "By", "Jayr"].map((word, index) => (
-              <span className="signature-mask" key={word}>
-                <motion.span
-                  initial={reduced ? false : { y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    delay: reduced ? 0 : 0.4 + index * 0.085,
-                    duration: reduced ? 0 : 0.55,
-                    ease: timing.ease,
-                  }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </div>
-          <motion.span
-            className="signature-brace"
-            initial={reduced ? false : { x: 30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{
-              delay: reduced ? 0 : 0.4,
-              duration: reduced ? 0 : 0.55,
-              ease: timing.ease,
-            }}
-          >
-            {"}"}
-          </motion.span>
-        </div>
-        <motion.div
-          className="signature-rule"
-          initial={reduced ? false : { scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{
-            delay: reduced ? 0 : 0.65,
-            duration: reduced ? 0 : 0.5,
-            ease: timing.ease,
-          }}
-        />
-        <div className="signature-bottom">
-          <span>THOUGHTFULLY ENGINEERED.</span>
-          <span>
-            CAVITE
-            <br />
-            PHILIPPINES
-          </span>
-        </div>
-        <span className="architecture-node node-one" />
-        <span className="architecture-node node-two" />
-      </motion.div>
-      <motion.span
-        className="architecture-chip chip-one"
-        initial={reduced ? false : { opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: reduced ? 0 : 0.7, duration: reduced ? 0 : 0.4 }}
-      >
-        React / interfaces
-      </motion.span>
-      <motion.span
-        className="architecture-chip chip-two"
-        initial={reduced ? false : { opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: reduced ? 0 : 0.8, duration: reduced ? 0 : 0.4 }}
-      >
-        Node + C# / systems
-      </motion.span>
-    </div>
-  );
-}
-
 export default function Hero() {
   const ref = useRef(null);
   const { reduced, interactive } = useMotionSettings();
+  const inView = useInView(ref);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -45]),
-    visualY = useTransform(scrollYProgress, [0, 1], [0, 65]),
-    gridY = useTransform(scrollYProgress, [0, 1], [0, 95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.65]);
-  const enter = (delay) => ({
-    initial: reduced ? false : { opacity: 0, y: 12 },
+  const backdropY = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const targetX = useMotionValue(0);
+  const targetY = useMotionValue(0);
+  const x = useSpring(targetX, { stiffness: 70, damping: 24 });
+  const y = useSpring(targetY, { stiffness: 70, damping: 24 });
+  const enter = (delay, distance = 18) => ({
+    initial: reduced ? false : { opacity: 0, y: distance },
     animate: { opacity: 1, y: 0 },
     transition: {
-      duration: reduced ? 0 : 0.5,
+      duration: reduced ? 0 : 0.8,
       delay: reduced ? 0 : delay,
       ease: timing.ease,
     },
   });
+  function move(event) {
+    if (!interactive || event.pointerType !== "mouse") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    targetX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 12);
+    targetY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 8);
+  }
+
   return (
-    <section id="home" ref={ref} className="hero cinematic-hero">
+    <section id="home" ref={ref} className="cinema-hero" data-visible={inView}>
       <motion.div
-        className="hero-atmosphere"
-        initial={reduced ? false : { opacity: 0, scale: 1.035 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: reduced ? 0 : 4, ease: timing.ease }}
-        style={interactive ? { y: gridY } : undefined}
+        className="cinema-atmosphere"
         aria-hidden="true"
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: reduced ? 0 : 1.4 }}
+        style={interactive ? { y: backdropY } : undefined}
       />
-      <div className="container hero-container">
-        <div className="hero-top">
-          <motion.span {...enter(0.05)} className="eyebrow">
+      <div className="container cinema-container">
+        <motion.div {...enter(0.05)} className="cinema-top">
+          <span className="eyebrow">
             <span className="status-dot" /> JAYR CASANO /{" "}
             {profile.role.toUpperCase()}
-          </motion.span>
-          <span className="hero-index">
+          </span>
+          <span className="cinema-motto">
             INDEPENDENT MIND. FULL-STACK THINKING.
           </span>
-        </div>
-        <div className="row align-items-center hero-main-row">
+        </motion.div>
+        <div
+          className="cinema-stage"
+          onPointerMove={move}
+          onPointerLeave={() => {
+            targetX.set(0);
+            targetY.set(0);
+          }}
+        >
           <motion.div
-            className="col-lg-8 hero-copy"
-            style={interactive ? { y: copyY, opacity } : undefined}
+            {...enter(0.45, 0)}
+            className="cinema-marquee"
+            aria-hidden="true"
           >
+            <div className="cinema-marquee-track">
+              {[0, 1].map((copy) => (
+                <span className="cinema-marquee-set" key={copy}>
+                  JAYR CASANO <span> / </span> BUILTBYJAYR <span> / </span>{" "}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          <div className="cinema-copy">
             <RevealText
               as="h1"
               ariaLabel="I build software for the web."
               immediate
-              delay={0.14}
-              className="hero-headline"
+              delay={0.65}
+              className="cinema-headline"
             >
               {[
                 "I build",
-                <span key="software" className="serif-accent">
+                <span key="software" className="cinema-word">
                   software
                 </span>,
                 "for the web.",
               ]}
             </RevealText>
-            <motion.p {...enter(0.42)} className="hero-description">
-              {profile.intro}
-            </motion.p>
-            <motion.div {...enter(0.56)} className="hero-actions">
+            <motion.div {...enter(0.95)} className="cinema-actions">
               <MagneticLink className="primary-button" href="#work">
                 View my work <ArrowUpRight size={18} />
               </MagneticLink>
@@ -222,15 +110,67 @@ export default function Hero() {
                 Let’s connect <ArrowUpRight size={17} />
               </a>
             </motion.div>
-          </motion.div>
-          <motion.div
-            className="col-lg-4 hero-visual-col"
-            style={interactive ? { y: visualY } : undefined}
-          >
-            <DeveloperSignature />
+          </div>
+          <div className="cinema-portrait">
+            <motion.div
+              className="cinema-orbits"
+              aria-hidden="true"
+              initial={reduced ? false : { opacity: 0, scale: 0.88 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: reduced ? 0 : 1.1,
+                delay: reduced ? 0 : 0.15,
+                ease: timing.ease,
+              }}
+            >
+              <span className="cinema-orbit" />
+              <span className="cinema-orbit cinema-orbit-outer" />
+              <span className="cinema-cross cinema-cross-one">+</span>
+              <span className="cinema-cross cinema-cross-two">+</span>
+            </motion.div>
+            <motion.div
+              className="cinema-subject-parallax"
+              style={interactive ? { x, y } : undefined}
+            >
+              <motion.img
+                className="cinema-subject"
+                src="/jayr-cutout.png"
+                alt="Jay-r Casano, Full-Stack Developer"
+                width="1086"
+                height="1448"
+                fetchPriority="high"
+                initial={reduced ? false : { opacity: 0, y: 35, scale: 1.025 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: reduced ? 0 : 1.1,
+                  delay: reduced ? 0 : 0.3,
+                  ease: timing.ease,
+                }}
+              />
+            </motion.div>
+            <motion.div
+              {...enter(1)}
+              className="cinema-signature"
+              aria-hidden="true"
+            >
+              <Code2 size={20} strokeWidth={1.2} />
+              <span>
+                <strong>{"{ BuiltByJayr }"}</strong>
+                <small>THOUGHTFULLY ENGINEERED.</small>
+              </span>
+              <span className="cinema-signature-index">01</span>
+            </motion.div>
+          </div>
+          <motion.div {...enter(0.8)} className="cinema-intro">
+            <span className="cinema-intro-rule" aria-hidden="true" />
+            <p>{profile.intro}</p>
+            <div className="cinema-stack">
+              <span>React / interfaces</span>
+              <span>Node + C# / systems</span>
+            </div>
           </motion.div>
         </div>
-        <motion.div {...enter(0.7)} className="hero-bottom">
+        <motion.div {...enter(1.1)} className="cinema-footer">
           <span>
             BASED IN CAVITE, PHILIPPINES <span className="muted-slash">/</span>{" "}
             OPEN TO OPPORTUNITIES

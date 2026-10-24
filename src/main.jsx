@@ -14,3 +14,4 @@ createRoot(document.getElementById("root")).render(
 );
 import "./showcase.css";
 import "./room-pillar.css";
+import "./cinema.css";

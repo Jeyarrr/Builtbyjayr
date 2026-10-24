@@ -61,7 +61,16 @@ export default function Navigation() {
           aria-hidden="true"
         />
       )}
-      <div className="container header-inner">
+      <motion.div
+        className="container header-inner"
+        initial={reduced ? false : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: reduced ? 0 : 0.7,
+          delay: reduced ? 0 : 1,
+          ease: timing.ease,
+        }}
+      >
         <motion.a
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -146,7 +155,7 @@ export default function Navigation() {
             {open ? <X /> : <Menu />}
           </button>
         </div>
-      </div>
+      </motion.div>
     </header>
   );
 }
