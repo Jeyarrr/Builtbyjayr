@@ -25,6 +25,12 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   const backdropY = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const portraitOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.4, 1],
+    [1, 0.85, 0],
+  );
   const targetX = useMotionValue(0);
   const targetY = useMotionValue(0);
   const x = useSpring(targetX, { stiffness: 70, damping: 24 });
@@ -111,7 +117,14 @@ export default function Hero() {
               </a>
             </motion.div>
           </div>
-          <div className="cinema-portrait">
+          <motion.div
+            className="cinema-portrait"
+            style={
+              interactive
+                ? { y: portraitY, opacity: portraitOpacity }
+                : undefined
+            }
+          >
             <motion.div
               className="cinema-orbits"
               aria-hidden="true"
@@ -160,7 +173,7 @@ export default function Hero() {
               </span>
               <span className="cinema-signature-index">01</span>
             </motion.div>
-          </div>
+          </motion.div>
           <motion.div {...enter(0.8)} className="cinema-intro">
             <span className="cinema-intro-rule" aria-hidden="true" />
             <p>{profile.intro}</p>

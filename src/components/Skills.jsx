@@ -49,7 +49,7 @@ const groups = [
 ];
 const technologies = [...new Set(groups.flatMap(({ items }) => items))];
 export default function Skills() {
-  const { reduced, interactive } = useMotionSettings();
+  const { interactive } = useMotionSettings();
   return (
     <UnfoldSection id="skills" className="skills-section section-space">
       <div className="container">
@@ -97,7 +97,7 @@ export default function Skills() {
                       key={item}
                       tabIndex={0}
                       whileHover={interactive ? { y: -4 } : undefined}
-                      whileFocus={reduced ? undefined : { y: -2 }}
+                      whileFocus={interactive ? { y: -2 } : undefined}
                       transition={{ duration: 0.2 }}
                     >
                       <BrandIcon name={item} />

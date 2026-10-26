@@ -23,7 +23,10 @@ import {
   useMotionSettings,
 } from "../motion/MotionSystem";
 
-const filters = ["All work", ...new Set(projects.map((project) => project.type))];
+const filters = [
+  "All work",
+  ...new Set(projects.map((project) => project.type)),
+];
 
 function ProjectVisual({ project, image = project.image, alt }) {
   const [failed, setFailed] = useState(false);
@@ -158,6 +161,7 @@ function ProjectDialog({ project, onClose }) {
   const ref = useRef(null);
   const { reduced } = useMotionSettings();
   const [activeImage, setActiveImage] = useState(0);
+  const [direction, setDirection] = useState(1);
   const selectedImage = project.gallery?.[activeImage];
   useEffect(() => {
     const dialog = ref.current,
@@ -194,12 +198,18 @@ function ProjectDialog({ project, onClose }) {
         >
           <X />
         </button>
-        <ProjectVisual
+        <motion.div
           key={selectedImage?.src || project.id}
-          project={project}
-          image={selectedImage?.src}
-          alt={selectedImage?.alt}
-        />
+          initial={reduced ? false : { opacity: 0, x: direction * 22 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: reduced ? 0 : 0.28, ease: timing.ease }}
+        >
+          <ProjectVisual
+            project={project}
+            image={selectedImage?.src}
+            alt={selectedImage?.alt}
+          />
+        </motion.div>
         {project.gallery?.length > 1 && (
           <>
             <div className="project-gallery-toolbar">
@@ -211,24 +221,26 @@ function ProjectDialog({ project, onClose }) {
                 <button
                   type="button"
                   aria-label={`Previous ${project.name} screenshot`}
-                  onClick={() =>
+                  onClick={() => {
+                    setDirection(-1);
                     setActiveImage(
                       (index) =>
                         (index - 1 + project.gallery.length) %
                         project.gallery.length,
-                    )
-                  }
+                    );
+                  }}
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
                   type="button"
                   aria-label={`Next ${project.name} screenshot`}
-                  onClick={() =>
+                  onClick={() => {
+                    setDirection(1);
                     setActiveImage(
                       (index) => (index + 1) % project.gallery.length,
-                    )
-                  }
+                    );
+                  }}
                 >
                   <ChevronRight size={18} />
                 </button>

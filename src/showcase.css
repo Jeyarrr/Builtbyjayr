@@ -1,4 +1,4 @@
-/* Personal showcase: warm orange, ink, and unfolding editorial panels. */
+/* Personal showcase: emerald, ink, and unfolding editorial panels. */
 :root {
   --page: #080808;
   --surface: #101010;
@@ -10,16 +10,16 @@
   --border: #ffffff1a;
   --header-bg: #080808b8;
   --header-solid: #080808eb;
-  --accent: #ff7029;
-  --accent-soft: #ff702918;
-  --button-bg: #ff7029;
-  --button-hover: #ff8b45;
+  --accent: #10b981;
+  --accent-soft: #10b98118;
+  --button-bg: #10b981;
+  --button-hover: #34d399;
   --button-text: #160c07;
-  --focus-ring: #ff8b45;
-  --border-strong: #ff702966;
-  --ambient: #ff702919;
-  --code-keyword: #ff8b45;
-  --glass-highlight: #ff70291f;
+  --focus-ring: #34d399;
+  --border-strong: #10b98166;
+  --ambient: #10b98119;
+  --code-keyword: #34d399;
+  --glass-highlight: #10b9811f;
   --glass-radius: 12px;
 }
 :root[data-theme="light"] {
@@ -27,15 +27,15 @@
   --surface: #eee7de;
   --surface-work: #eee7de;
   --surface-contact: #e9dfd4;
-  --accent: #ad3c0b;
-  --accent-soft: #df531612;
-  --button-bg: #ff7029;
-  --button-hover: #f38a51;
+  --accent: #047857;
+  --accent-soft: #10b98112;
+  --button-bg: #10b981;
+  --button-hover: #34d399;
   --button-text: #160c07;
-  --focus-ring: #ad3c0b;
-  --border-strong: #ad3c0b55;
-  --ambient: #ff702917;
-  --code-keyword: #ad3c0b;
+  --focus-ring: #047857;
+  --border-strong: #04785755;
+  --ambient: #10b98117;
+  --code-keyword: #047857;
   --portrait-fade: #eee7de;
 }
 .site-header {
@@ -129,11 +129,11 @@
   position: absolute;
   inset: 35px -8px 12px;
   border-radius: 280px 280px 24px 24px;
-  background: linear-gradient(155deg, #ff9341 0%, #ff7029 35%, #ed500b 100%);
+  background: linear-gradient(155deg, #6ee7b7 0%, #10b981 35%, #047857 100%);
   box-shadow:
-    inset 0 0 0 12px #ffaf5e45,
-    0 0 55px #ff702943,
-    0 0 130px #ff702927;
+    inset 0 0 0 12px #a7f3d045,
+    0 0 55px #10b98143,
+    0 0 130px #10b98127;
 }
 .hero-showcase-portrait {
   position: absolute;
@@ -156,10 +156,10 @@
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   color: #faf7f2;
-  border: 1px solid #ff702980;
+  border: 1px solid #10b98180;
   border-radius: 18px;
   box-shadow:
-    0 12px 45px #ff702914,
+    0 12px 45px #10b98114,
     0 16px 40px #00000055;
 }
 .signature-stage .signature-lockup {
@@ -170,7 +170,7 @@
 }
 .signature-stage .signature-brace {
   font-size: 66px;
-  color: #ff7029;
+  color: #10b981;
 }
 .signature-stage .signature-caption,
 .signature-stage .signature-bottom {
@@ -180,7 +180,7 @@
   padding-top: 10px;
 }
 .signature-stage .signature-rule {
-  background: #ff702965;
+  background: #10b98165;
 }
 .signature-stage .architecture-grid,
 .signature-stage .signature-orb,
@@ -193,7 +193,7 @@
   z-index: 2;
   color: #f5e8df;
   background: #151515e8;
-  border-color: #ff702966;
+  border-color: #10b98166;
   box-shadow: none;
   display: inline-flex;
   align-items: center;
@@ -208,8 +208,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #ff7029;
-  box-shadow: 0 0 12px #ff7029b3;
+  background: #10b981;
+  box-shadow: 0 0 12px #10b981b3;
 }
 .cinematic-hero::before {
   content: "";
@@ -217,7 +217,7 @@
   inset: 10% 0 0 45%;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(#ff70292b 0.7px, transparent 0.8px);
+  background-image: radial-gradient(#10b9812b 0.7px, transparent 0.8px);
   background-size: 20px 20px;
   mask-image: radial-gradient(
     ellipse,
@@ -233,13 +233,13 @@
   height: 850px;
   right: -630px;
   bottom: -550px;
-  border: 1px solid #ff702960;
+  border: 1px solid #10b98160;
   border-radius: 50%;
   transform: rotate(-25deg) scaleX(0.7);
 }
 .primary-button:hover,
 .site-header .nav-contact:hover {
-  box-shadow: 0 5px 28px #ff702930;
+  box-shadow: 0 5px 28px #10b98130;
 }
 [data-motion="full"] .signature-stage .architecture-chip {
   animation: showcase-float 6s ease-in-out infinite;
@@ -293,7 +293,7 @@
   border: 1px solid var(--border-strong);
   border-radius: 28px 28px 14px 14px;
   background:
-    radial-gradient(ellipse at 50% 30%, #ff702933, transparent 65%),
+    radial-gradient(ellipse at 50% 30%, #10b98133, transparent 65%),
     var(--surface-raised);
 }
 .about-art > .eyebrow {
@@ -328,7 +328,7 @@
   border-color: var(--border-strong);
   box-shadow:
     0 18px 44px #00000015,
-    0 0 28px #ff702909;
+    0 0 28px #10b98109;
 }
 .showcase-grid .project-image-button {
   border-radius: 10px;
@@ -358,7 +358,7 @@
 }
 .technology-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 22px #ff70290c;
+  box-shadow: 0 6px 22px #10b9810c;
 }
 .education-row {
   border-radius: 12px;

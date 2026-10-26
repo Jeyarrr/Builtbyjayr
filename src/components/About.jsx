@@ -88,10 +88,12 @@ export default function About() {
                 <br />
                 <span>Dependable systems.</span>
               </h3>
-              {profile.about.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
             </Reveal>
+            {profile.about.map((paragraph, index) => (
+              <Reveal key={paragraph} delay={Math.min(index * 0.045, 0.18)}>
+                <p>{paragraph}</p>
+              </Reveal>
+            ))}
             <Reveal delay={0.16}>
               <a href="#experience" className="text-button">
                 The experience behind the work <ArrowUpRight size={16} />

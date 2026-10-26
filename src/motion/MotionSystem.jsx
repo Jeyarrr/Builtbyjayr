@@ -94,6 +94,7 @@ export const useMotionSettings = () => useContext(MotionContext);
 export function UnfoldSection({ children, className = "", ...props }) {
   const ref = useRef(null);
   const { reduced } = useMotionSettings();
+  const desktop = useMediaQuery("(min-width: 992px)");
   const [focused, setFocused] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -108,11 +109,17 @@ export function UnfoldSection({ children, className = "", ...props }) {
       <motion.div
         className="unfold-surface"
         onFocusCapture={() => setFocused(true)}
-        style={{
-          y: staticView ? 0 : y,
-          scale: staticView ? 1 : scale,
-          opacity: staticView ? 1 : opacity,
-        }}
+        // Desktop sections contain large screenshot grids. Keep their surface
+        // stationary and let the smaller Reveal children animate independently.
+        style={
+          desktop
+            ? undefined
+            : {
+                y: staticView ? 0 : y,
+                scale: staticView ? 1 : scale,
+                opacity: staticView ? 1 : opacity,
+              }
+        }
       >
         {children}
       </motion.div>
