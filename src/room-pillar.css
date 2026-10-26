@@ -672,3 +672,16 @@ html {
   height: 100%;
   object-fit: contain;
 }
+
+.project-dialog .project-art.resolvedesk-screenshot {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1905 / 906;
+  background: #10111a;
+}
+.project-dialog .resolvedesk-screenshot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

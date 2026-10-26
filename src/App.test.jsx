@@ -274,12 +274,12 @@ describe("portfolio interactions", () => {
     render(<App />);
     expect(
       screen.getAllByRole("button", { name: /project details/ }),
-    ).toHaveLength(5);
+    ).toHaveLength(6);
     await user.click(screen.getByRole("button", { name: "Web apps" }));
     await waitFor(() =>
       expect(
         screen.getAllByRole("button", { name: /project details/ }),
-      ).toHaveLength(3),
+      ).toHaveLength(4),
     );
     expect(
       screen.getByRole("button", { name: "View TASTENET project details" }),
@@ -297,7 +297,7 @@ describe("portfolio interactions", () => {
     await user.click(screen.getByRole("button", { name: /All work/ }));
     expect(
       screen.getAllByRole("button", { name: /project details/ }),
-    ).toHaveLength(5);
+    ).toHaveLength(6);
   });
 
   it("opens project details, exposes its real link, and restores focus when closed", async () => {
