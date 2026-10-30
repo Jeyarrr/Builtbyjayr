@@ -213,7 +213,7 @@ export const projects = [
       "From product discovery to order management. A complete tech storefront connecting a considered shopping experience with the systems behind it.",
     tags: ["React", "Node.js", "Express", "PostgreSQL"],
     color: "techora-blue",
-    url: "https://techora-store.vercel.app/",
+    url: "https://techora-zeta.vercel.app/",
     github: "https://github.com/Jeyarrr/TechOra",
     image: "/projects/techora/home.png",
     gallery: [

@@ -188,7 +188,7 @@ describe("portfolio interactions", () => {
     ]);
     expect(
       screen.getByRole("link", { name: "TechOra: open live site" }).href,
-    ).toBe("https://techora-store.vercel.app/");
+    ).toBe("https://techora-zeta.vercel.app/");
     expect(
       screen.getByRole("link", { name: "TechOra source on GitHub" }).href,
     ).toBe("https://github.com/Jeyarrr/TechOra");

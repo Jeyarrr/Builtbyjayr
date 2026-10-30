@@ -802,6 +802,14 @@ html {
 .external-project-link {
   min-height: 44px;
 }
+.external-project-link {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  flex: 0 0 44px;
+  padding: 0;
+  aspect-ratio: 1;
+}
 .project-actions svg,
 .cinema-footer svg {
   transition: transform 0.25s;
