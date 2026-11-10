@@ -674,6 +674,7 @@ html {
 }
 
 .project-dialog .project-art.resolvedesk-screenshot,
+.project-dialog .project-art.techora-screenshot,
 .project-dialog .project-art.viotechpm-screenshot {
   height: auto;
   min-height: 0;

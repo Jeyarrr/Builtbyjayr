@@ -11,7 +11,17 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { profile } from "./content";
+import { profile, projects } from "./content";
+// Pointer physics and loop geometry are exercised in the real-browser review.
+// jsdom supplies no layout for Embla to measure.
+vi.mock("embla-carousel-react", () => ({
+  default: () => [undefined, undefined],
+}));
+async function chooseProject(user, name) {
+  await user.click(
+    screen.getByRole("button", { name: `Select ${name} project` }),
+  );
+}
 
 beforeAll(() => {
   window.matchMedia = vi.fn((query) => ({
@@ -57,6 +67,38 @@ afterEach(() => {
 });
 
 describe("portfolio interactions", () => {
+  it("starts with the thesis, preserves project order, and centers side cards before opening", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+    expect(projects.slice(0, 3).map((p) => p.id)).toEqual([
+      "tastenet",
+      "viotechpm",
+      "viotech-edtr",
+    ]);
+    expect(
+      [...container.querySelectorAll(".work-slide")].map((n) =>
+        n.getAttribute("aria-label"),
+      ),
+    ).toEqual(projects.map((p, i) => `${i + 1}. ${p.name}`));
+    expect(
+      container
+        .querySelector(".work-slide[data-active=true]")
+        .classList.contains("project-tastenet"),
+    ).toBe(true);
+    await user.click(
+      container.querySelector(".project-viotechpm .work-side-select"),
+    );
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(
+      container
+        .querySelector(".work-slide[data-active=true]")
+        .classList.contains("project-viotechpm"),
+    ).toBe(true);
+    await user.click(
+      screen.getByRole("button", { name: "View ViotechPM project details" }),
+    );
+    expect(screen.getByRole("dialog").open).toBe(true);
+  });
   it("toggles and persists the color theme without changing motion preferences", async () => {
     const user = userEvent.setup();
     const view = render(<App />);
@@ -171,7 +213,8 @@ describe("portfolio interactions", () => {
     expect(container.querySelectorAll("#about img.portrait")).toHaveLength(1);
   });
 
-  it("presents the requested section order and real TechOra destinations", () => {
+  it("presents the requested section order and real TechOra destinations", async () => {
+    const user = userEvent.setup();
     const { container } = render(<App />);
     expect(
       [...container.querySelectorAll("main > section")].map(
@@ -186,6 +229,7 @@ describe("portfolio interactions", () => {
       "education",
       "contact",
     ]);
+    await chooseProject(user, "TechOra");
     expect(
       screen.getByRole("link", { name: "TechOra: open live site" }).href,
     ).toBe("https://techora-zeta.vercel.app/");
@@ -203,6 +247,7 @@ describe("portfolio interactions", () => {
       "reduced",
     );
     expect(view.container.querySelector(".scroll-progress")).toBeNull();
+    await chooseProject(user, "TechOra");
     await user.click(
       screen.getByRole("button", { name: "View TechOra project details" }),
     );
@@ -273,30 +318,32 @@ describe("portfolio interactions", () => {
     const user = userEvent.setup();
     render(<App />);
     expect(
-      screen.getAllByRole("button", { name: /project details/ }),
+      screen.getAllByRole("button", { name: /^Select .* project$/ }),
     ).toHaveLength(7);
     await user.click(screen.getByRole("button", { name: "Web apps" }));
     await waitFor(() =>
       expect(
-        screen.getAllByRole("button", { name: /project details/ }),
+        screen.getAllByRole("button", { name: /^Select .* project$/ }),
       ).toHaveLength(5),
     );
     expect(
-      screen.getByRole("button", { name: "View TASTENET project details" }),
+      screen.getByRole("button", { name: "Select TASTENET project" }),
     ).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "View JBank project details" })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "View JBank project details" }),
+    ).toBeNull();
     await user.click(screen.getByRole("button", { name: "Websites" }));
     await waitFor(() =>
       expect(
-        screen.getAllByRole("button", { name: /project details/ }),
+        screen.getAllByRole("button", { name: /^Select .* project$/ }),
       ).toHaveLength(2),
     );
     expect(
-      screen.getByRole("button", { name: "View JB Nav Enterprise project details" }),
+      screen.getByRole("button", { name: "Select JB Nav Enterprise project" }),
     ).toBeTruthy();
     await user.click(screen.getByRole("button", { name: /All work/ }));
     expect(
-      screen.getAllByRole("button", { name: /project details/ }),
+      screen.getAllByRole("button", { name: /^Select .* project$/ }),
     ).toHaveLength(7);
   });
 
@@ -307,6 +354,7 @@ describe("portfolio interactions", () => {
         <App />
       </React.StrictMode>,
     );
+    await chooseProject(user, "VioTech I.T. Solutions eDTR");
     const trigger = screen.getByRole("button", {
       name: "View VioTech I.T. Solutions eDTR project details",
     });
@@ -317,9 +365,9 @@ describe("portfolio interactions", () => {
     expect(dialog.querySelector(".project-art img").getAttribute("src")).toBe(
       "/projects/viotech-edtr/sign-in.png",
     );
-    expect(
-      screen.getByRole("link", { name: /Visit project/ }).href,
-    ).toBe("https://edtr-indol.vercel.app/");
+    expect(screen.getByRole("link", { name: /Visit project/ }).href).toBe(
+      "https://edtr-indol.vercel.app/",
+    );
     await user.click(
       screen.getByRole("button", { name: "Close project details" }),
     );
@@ -374,19 +422,27 @@ describe("portfolio interactions", () => {
     );
     expect(screenshot()).toBe("/projects/tastenet-pern/sign-up.png");
     await user.click(
-      screen.getByRole("button", { name: "Show TASTENET Admin account screenshot" }),
+      screen.getByRole("button", {
+        name: "Show TASTENET Admin account screenshot",
+      }),
     );
     expect(screenshot()).toBe("/projects/tastenet-pern/admin-inventory.png");
-    await user.click(
-      screen.getByRole("button", { name: "Show TASTENET Superadmin account screenshot" }),
-    );
-    expect(screenshot()).toBe("/projects/tastenet-pern/superadmin-dashboard.png");
     await user.click(
       screen.getByRole("button", {
         name: "Show TASTENET Superadmin account screenshot",
       }),
     );
-    expect(screenshot()).toBe("/projects/tastenet-pern/superadmin-dashboard.png");
+    expect(screenshot()).toBe(
+      "/projects/tastenet-pern/superadmin-dashboard.png",
+    );
+    await user.click(
+      screen.getByRole("button", {
+        name: "Show TASTENET Superadmin account screenshot",
+      }),
+    );
+    expect(screenshot()).toBe(
+      "/projects/tastenet-pern/superadmin-dashboard.png",
+    );
     await user.click(
       screen.getByRole("button", { name: "Next TASTENET screenshot" }),
     );
@@ -396,6 +452,7 @@ describe("portfolio interactions", () => {
   it("shows the JB Nav Enterprise screenshots in its project gallery", async () => {
     const user = userEvent.setup();
     render(<App />);
+    await chooseProject(user, "JB Nav Enterprise");
     await user.click(
       screen.getByRole("button", {
         name: "View JB Nav Enterprise project details",

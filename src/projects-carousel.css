@@ -1,0 +1,410 @@
+/* Centered project showcase. Namespaced to leave the rest of the portfolio intact. */
+.work-carousel {
+  --work-slide: 33.333333%;
+  max-width: 1600px;
+  margin: 8px auto 0;
+}
+.work-carousel-viewport {
+  overflow: hidden;
+  padding-block: 28px;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  outline-offset: -3px;
+}
+.work-carousel-viewport:active {
+  cursor: grabbing;
+}
+.work-carousel-track {
+  display: flex;
+  align-items: stretch;
+}
+.work-slide {
+  flex: 0 0 var(--work-slide);
+  min-width: 0;
+  padding: 0 14px;
+  position: relative;
+}
+.work-card {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  transform: scale(0.84);
+  opacity: 0.43;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s,
+    border-color 0.3s,
+    box-shadow 0.4s;
+}
+.work-slide[data-active="true"] .work-card {
+  transform: scale(1);
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 16px 45px #00000025;
+}
+.work-card-visual {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: var(--text);
+  background: var(--page);
+  aspect-ratio: 1905 / 906;
+  overflow: hidden;
+  cursor: pointer;
+}
+.work-card-visual .project-art.screenshot-art {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--page);
+}
+.work-card-visual .screenshot-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s;
+}
+.work-card-index {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 7px 9px;
+  background: #09090be8;
+  color: #f4f4f5;
+  border: 1px solid #ffffff2b;
+  border-radius: 4px;
+  font: 8px/1.2 monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.work-image-hint {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #09090be8;
+  color: #fff;
+  padding: 9px 12px;
+  border: 1px solid #ffffff2b;
+  border-radius: 30px;
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+.work-card-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 28px;
+  min-height: 298px;
+  border-top: 1px solid var(--border);
+  background:
+    linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface);
+}
+.work-slide[data-active="false"] .work-card-reveal {
+  visibility: hidden;
+}
+.work-card-label {
+  display: block;
+  color: var(--accent);
+  font: 8px/1.6 monospace;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+.work-card-copy h3 {
+  font-size: clamp(24px, 2.5vw, 38px);
+  font-weight: 550;
+  line-height: 1.16;
+  letter-spacing: -0.05em;
+  margin: 0 0 12px;
+}
+.work-card-copy > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+.work-card-reveal .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 12px;
+}
+.work-card-reveal {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.work-card-reveal .tag-list span {
+  font-size: 9px;
+  padding: 4px 7px;
+}
+.work-card-reveal ul {
+  margin: 0 0 16px;
+  padding-left: 15px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.work-card-links {
+  display: flex;
+  margin-top: auto;
+  gap: 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+.work-card-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  color: var(--text);
+  font-size: 11px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.work-card-links a:first-child {
+  color: var(--accent);
+}
+.work-card-links svg {
+  flex-shrink: 0;
+  transition: transform 0.25s;
+}
+.work-card-links a:hover svg:last-child {
+  transform: translate(2px, -2px);
+}
+.work-card-links a:focus-visible,
+.work-card-visual:focus-visible,
+.work-pagination button:focus-visible,
+.work-carousel-viewport:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -3px;
+}
+.work-side-select {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  width: 100%;
+  background: linear-gradient(transparent 35%, var(--page) 90%);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 30px;
+  cursor: pointer;
+  text-align: left;
+}
+.work-side-select span {
+  display: none;
+}
+.work-side-select small {
+  font: 9px/1.5 monospace;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-top: 14px;
+}
+.work-carousel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 8px;
+}
+.work-carousel-instruction,
+.work-current-project {
+  margin: 0;
+  color: var(--text-soft);
+  font: 9px/1.7 monospace;
+}
+.work-carousel-instruction > span:first-child {
+  display: inline-flex;
+  vertical-align: middle;
+  color: var(--accent);
+  font-size: 17px;
+  margin-right: 8px;
+}
+.work-keyboard-hint {
+  display: block;
+  padding-left: 24px;
+  font-size: 8px;
+  opacity: 0.75;
+}
+.work-current-project {
+  text-align: right;
+}
+.work-current-project span {
+  display: block;
+  color: var(--text-secondary);
+  max-width: 30ch;
+}
+.work-pagination {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1px;
+}
+.work-pagination button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+.work-pagination button span {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--text-soft);
+  transition:
+    width 0.3s,
+    background 0.3s;
+}
+.work-pagination button.is-active span {
+  width: 19px;
+  background: var(--accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-slide[data-active="true"] .work-card-reveal ul {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.3s,
+      transform 0.35s;
+  }
+  .work-slide[data-active="true"] .work-card:hover .work-card-reveal ul,
+  .work-slide[data-active="true"] .work-card:focus-within .work-card-reveal ul {
+    opacity: 1;
+    transform: none;
+  }
+  .work-slide[data-active="true"] .work-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 12px 45px var(--ambient);
+  }
+  .work-slide[data-active="true"] .work-card:hover .work-card-visual img {
+    transform: scale(1.025);
+    filter: brightness(0.86);
+  }
+  .work-slide[data-active="true"] .work-card:hover .work-image-hint,
+  .work-card:focus-within .work-image-hint {
+    opacity: 1;
+    transform: none;
+  }
+  .work-card-reveal {
+    transition: transform 0.35s;
+  }
+  .work-card:hover .work-card-reveal {
+    transform: translateY(-2px);
+  }
+  .work-side-select:hover {
+    background: linear-gradient(transparent 45%, var(--page) 95%);
+  }
+}
+@media (max-width: 1100px) {
+  .work-carousel {
+    --work-slide: 62%;
+  }
+  .work-card-copy {
+    padding: 22px 24px;
+  }
+}
+@media (max-width: 767px) {
+  .work-slide[data-active="true"] .work-card-reveal ul {
+    opacity: 1;
+    transform: none;
+  }
+  .work-carousel {
+    --work-slide: 88%;
+  }
+  .work-slide {
+    padding: 0 7px;
+  }
+  .work-carousel-viewport {
+    padding-block: 15px;
+  }
+  .work-card {
+    transform: scale(0.93);
+    border-radius: 12px;
+  }
+  .work-card-copy {
+    padding: 22px 20px 16px;
+    min-height: 340px;
+  }
+  .work-card-copy h3 {
+    font-size: 28px;
+  }
+  .work-card-copy > p {
+    font-size: 12px;
+  }
+  .work-card-label {
+    font-size: 8px;
+  }
+  .work-card-reveal ul {
+    font-size: 10px;
+  }
+  .work-card-index {
+    top: 10px;
+    left: 10px;
+    font-size: 7px;
+  }
+  .work-image-hint {
+    display: none;
+  }
+  .work-carousel-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 22px;
+    padding-top: 12px;
+  }
+  .work-carousel-instruction {
+    order: 2;
+    text-align: center;
+  }
+  .work-keyboard-hint {
+    display: none;
+  }
+  .work-current-project {
+    order: 3;
+    text-align: center;
+  }
+  .work-current-project span {
+    max-width: none;
+  }
+  .work-pagination {
+    width: 100%;
+    justify-content: center;
+  }
+  .work-side-select {
+    padding: 20px;
+  }
+}
+[data-motion="reduced"] .work-carousel * {
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-carousel * {
+    transition: none !important;
+  }
+}

@@ -1,17 +1,14 @@
 import { UnfoldSection } from "../motion/MotionSystem";
-import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useSpring,
-} from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import "../projects-carousel.css";
+import { motion } from "motion/react";
 import {
   ArrowUpRight,
   X,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
+  MoveHorizontal,
 } from "lucide-react";
 import BrandIcon from "./BrandIcon";
 import { projects } from "../content";
@@ -28,7 +25,11 @@ const filters = [
   ...new Set(projects.map((project) => project.type)),
 ];
 
-function ProjectVisual({ project, image = project.image, alt }) {
+function ProjectVisual({
+  project,
+  image = project.previewImage || project.image,
+  alt,
+}) {
   const [failed, setFailed] = useState(false);
   const imageDetails = project.gallery?.find((item) => item.src === image);
   if (image && !failed)
@@ -41,7 +42,7 @@ function ProjectVisual({ project, image = project.image, alt }) {
           alt={alt || imageDetails?.alt || `${project.name} interface`}
           loading="lazy"
           width={imageDetails?.width || 1440}
-          height={imageDetails?.height || 1000}
+          height={imageDetails?.height || (project.previewImage ? 685 : 1000)}
           onError={() => setFailed(true)}
         />
       </div>
@@ -49,111 +50,87 @@ function ProjectVisual({ project, image = project.image, alt }) {
   return <ProjectArt project={project} />;
 }
 
-function ProjectCard({ project, index, onOpen, ref }) {
-  const { reduced, interactive } = useMotionSettings();
-  const targetX = useMotionValue(0),
-    targetY = useMotionValue(0);
-  const rotateX = useSpring(targetX, { stiffness: 130, damping: 24 }),
-    rotateY = useSpring(targetY, { stiffness: 130, damping: 24 });
-  function move(event) {
-    if (!interactive || event.pointerType !== "mouse") return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    targetX.set(-((event.clientY - bounds.top) / bounds.height - 0.5) * 3);
-    targetY.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 3);
-  }
+function ProjectCard({ project, index, active, onSelect, onOpen }) {
   return (
-    <motion.article
-      ref={ref}
-      layout={reduced ? false : "position"}
-      className={`showcase-card project-${project.id}`}
-      initial={reduced ? false : { opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={reduced ? undefined : { opacity: 0, y: -10 }}
-      transition={{ duration: reduced ? 0 : 0.35, ease: timing.ease }}
+    <article
+      className={`work-slide project-${project.id}`}
+      role="group"
+      aria-roledescription="slide"
+      aria-label={`${index + 1}. ${project.name}`}
+      data-active={active}
     >
-      <Reveal className="project-image-reveal">
-        <motion.button
-          className="project-image-button"
-          onClick={() => onOpen(project)}
-          aria-label={`View ${project.name} project details`}
-          onPointerMove={move}
-          onPointerLeave={() => {
-            targetX.set(0);
-            targetY.set(0);
-          }}
-          style={
-            interactive
-              ? { rotateX, rotateY, transformPerspective: 1200 }
-              : undefined
+      <div className="work-card">
+        <button
+          className="work-card-visual"
+          tabIndex={active ? 0 : -1}
+          onClick={() => (active ? onOpen(project) : onSelect())}
+          aria-label={
+            active
+              ? `View ${project.name} project details`
+              : `Center ${project.name} project`
           }
+          aria-hidden={!active}
         >
-          <motion.div
-            className="project-image-inner"
-            initial={reduced ? false : { scale: 1.035 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: reduced ? 0 : 0.75, ease: timing.ease }}
-          >
-            <ProjectVisual project={project} />
-          </motion.div>
-          <span className="visual-corner-label">
-            {project.image ? "INTERFACE / PREVIEW" : "INTERFACE / ILLUSTRATION"}
+          <ProjectVisual project={project} />
+          <span className="work-card-index">
+            {String(index + 1).padStart(2, "0")} / {project.type}
           </span>
-          <span className="project-view-indicator">
-            VIEW PROJECT <ArrowUpRight size={18} />
+          <span className="work-image-hint">
+            {active ? "Explore screenshots" : "Bring into focus"}{" "}
+            <ArrowUpRight size={16} />
           </span>
-        </motion.button>
-      </Reveal>
-      <div className="showcase-copy">
-        <Reveal delay={0.04}>
-          <div className="project-meta">
-            <span className="project-number">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span>{project.label}</span>
-            {project.featured && (
-              <span className="featured-label">FEATURED</span>
-            )}
-          </div>
-        </Reveal>
-        <Reveal delay={0.08}>
+        </button>
+        <div className="work-card-copy" inert={!active ? true : undefined}>
+          <span className="work-card-label">{project.label}</span>
           <h3>{project.name}</h3>
           <p>{project.description}</p>
-        </Reveal>
-        <Reveal delay={0.12}>
-          <div className="tag-list">
-            {project.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
-          <div className="project-actions">
-            <button className="text-button" onClick={() => onOpen(project)}>
-              Explore project <ArrowRight size={16} />
-            </button>
-            <a
-              className="external-project-link"
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${project.name}: ${project.id === "jbank" ? "open Figma prototype" : "open live site"}`}
-            >
-              <ArrowUpRight size={19} />
-            </a>
-            {project.github && (
+          <div className="work-card-reveal">
+            <div className="tag-list">
+              {project.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+            <ul>
+              {project.features.slice(0, 2).map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+            <div className="work-card-links">
               <a
-                className="external-project-link"
-                href={project.github}
+                href={project.url}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${project.name} source on GitHub`}
+                aria-label={`${project.name}: open live site`}
               >
-                <BrandIcon name="GitHub" size={17} />
+                Live Preview <ArrowUpRight size={16} />
               </a>
-            )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${project.name} source on GitHub`}
+                >
+                  <BrandIcon name="GitHub" size={16} /> GitHub{" "}
+                  <ArrowUpRight size={14} />
+                </a>
+              )}
+            </div>
           </div>
-        </Reveal>
+        </div>
+        {!active && (
+          <button
+            className="work-side-select"
+            onClick={onSelect}
+            tabIndex={-1}
+            aria-label={`Center ${project.name} project`}
+          >
+            <span>{project.name}</span>
+            <small>Click to focus</small>
+          </button>
+        )}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -317,19 +294,65 @@ function ProjectDialog({ project, onClose }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState("All work"),
-    [selected, setSelected] = useState(null);
+  const [filter, setFilter] = useState("All work");
+  const [selected, setSelected] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const { reduced } = useMotionSettings();
   const visible = projects.filter(
     (project) => filter === "All work" || project.type === filter,
   );
+  const [viewportRef, api] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+    containScroll: false,
+    duration: reduced ? 0 : 32,
+    skipSnaps: false,
+  });
+  const wheelLock = useRef(0);
+  const pointerStart = useRef(null);
+  const dragged = useRef(false);
+  const onSelect = useCallback(() => {
+    if (api) setActiveIndex(api.selectedScrollSnap());
+  }, [api]);
+  useEffect(() => {
+    if (!api) return;
+    onSelect();
+    api.on("select", onSelect).on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect).off("reInit", onSelect);
+    };
+  }, [api, onSelect]);
+  useEffect(() => {
+    if (api) {
+      api.reInit();
+      api.scrollTo(0, true);
+    }
+    setActiveIndex(0);
+  }, [filter, api]);
+  function choose(index) {
+    api?.scrollTo(index, reduced);
+    setActiveIndex(index);
+  }
+  function keyboard(event) {
+    if (
+      event.target.closest("a, button") &&
+      !event.target.classList.contains("work-card-visual")
+    )
+      return;
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === "Home") choose(0);
+    else if (event.key === "End") choose(visible.length - 1);
+    else if (event.key === "ArrowLeft") api?.scrollPrev(reduced);
+    else api?.scrollNext(reduced);
+  }
   return (
     <UnfoldSection id="work" className="work-section section-space">
       <div className="container">
         <SectionHeading
           number="03"
           label="SELECTED WORK"
-          description="Real problems. Thoughtful solutions. A few things I’ve brought to life."
+          description="Real problems. Thoughtful solutions. A few things I've brought to life."
         >
           Proof in the <span className="serif-accent">projects.</span>
         </SectionHeading>
@@ -356,21 +379,116 @@ export default function Projects() {
               </button>
             ))}
           </div>
-          <span className="concept-note" role="status">
-            {String(visible.length).padStart(2, "0")} PROJECTS / 2025—2026
+          <span className="concept-note">
+            {String(visible.length).padStart(2, "0")} PROJECTS / 2025–2026
           </span>
         </Reveal>
-        <div className="showcase-grid">
-          <AnimatePresence initial={false} mode="popLayout">
-            {visible.map((project) => (
+      </div>
+      <div
+        className="work-carousel"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Selected projects"
+        onKeyDown={keyboard}
+      >
+        <div
+          className="work-carousel-viewport"
+          ref={viewportRef}
+          tabIndex={0}
+          aria-label="Drag or use left and right arrow keys to browse projects"
+          onPointerDownCapture={(event) => {
+            pointerStart.current = { x: event.clientX, y: event.clientY };
+            dragged.current = false;
+          }}
+          onPointerMoveCapture={(event) => {
+            if (
+              pointerStart.current &&
+              Math.abs(event.clientX - pointerStart.current.x) > 8
+            )
+              dragged.current = true;
+          }}
+          onPointerUpCapture={() => {
+            pointerStart.current = null;
+            // The click from this gesture is synchronous; later keyboard and
+            // assistive clicks must not inherit the drag suppression.
+            setTimeout(() => {
+              dragged.current = false;
+            }, 0);
+          }}
+          onPointerCancelCapture={() => {
+            pointerStart.current = null;
+            dragged.current = false;
+          }}
+          onClickCapture={(event) => {
+            if (dragged.current) {
+              event.preventDefault();
+              event.stopPropagation();
+              dragged.current = false;
+            }
+          }}
+          onWheel={(event) => {
+            // Only horizontal intent belongs to the carousel; page scrolling stays native.
+            if (
+              Math.abs(event.deltaX) < Math.abs(event.deltaY) ||
+              Math.abs(event.deltaX) < 8
+            )
+              return;
+            const now = performance.now();
+            if (now - wheelLock.current < 400) return;
+            wheelLock.current = now;
+            event.deltaX > 0
+              ? api?.scrollNext(reduced)
+              : api?.scrollPrev(reduced);
+          }}
+        >
+          <div className="work-carousel-track">
+            {visible.map((project, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
                 index={projects.indexOf(project)}
+                active={index === activeIndex}
+                onSelect={() => choose(index)}
                 onOpen={setSelected}
               />
             ))}
-          </AnimatePresence>
+          </div>
+        </div>
+        <div className="container work-carousel-footer">
+          <p className="work-carousel-instruction">
+            <span aria-hidden="true">
+              <MoveHorizontal size={16} />
+            </span>{" "}
+            Drag to explore{" "}
+            <span className="work-keyboard-hint">/ Arrow keys to navigate</span>
+          </p>
+          <div
+            className="work-pagination"
+            role="group"
+            aria-label="Choose project"
+          >
+            {visible.map((project, index) => (
+              <button
+                key={project.id}
+                className={index === activeIndex ? "is-active" : ""}
+                aria-label={`Select ${project.name} project`}
+                aria-pressed={index === activeIndex}
+                onClick={() => choose(index)}
+              >
+                <span />
+              </button>
+            ))}
+          </div>
+          <p
+            className="work-current-project"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(visible.length).padStart(2, "0")}{" "}
+            <span>{visible[activeIndex]?.name}</span>
+          </p>
         </div>
       </div>
       {selected && (
